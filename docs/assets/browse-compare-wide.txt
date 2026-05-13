@@ -1,0 +1,22 @@
+------------------------------------------------------------------------------------------------------------------------------------
+Flourisher interactive browse: "analytics"
+18 visible of 18 hard-coded results | 2 marked | 0 hidden
+ Results    Details   [Compare]
+> / search products | ask question | compare selected | remove from view
+------------------------------------------------------------------------------------------------------------------------------------
+   Business          Profile            Tags                           Stripe     | Detail panel                                    
+--- ----------------- ------------------ ------------------------------ ------... | ------------                                    
+   Launchlane        @launchlane        [Community] [one-time payme... Payment... | Compare selected                                
+   Copper Canary     @coppercanary      [Silver] [workflow] [SOC2 p... Radar c... | * @atlasmetrics: marketplace payouts, SOC2, U...
+   Ribbon Desk       @ribbondesk        [Pilot] [subscription] [cus... Support... | * @vectorgrove: subscription, SOC2 pending, M...
+   Summit Schema     @summitschema      [Gold] [workflow] [SOC2]       Data pi... |                                                 
+   Fieldnote Pay     @fieldnotepay      [Silver] [workflow] [SOC2 p... Termina... | Actions                                         
+   Beacon Basket     @beaconbasket      [Community] [subscription] ... Checkou... | s search products                               
+   Quota Studio      @quotastudio       [Gold] [subscription] [SOC2]   Subscri... | a ask a question                                
+   Fairwater Labs    @fairwater         [Pilot] [workflow] [custome... Custom ... | x remove from view                              
+>* Vector Grove      @vectorgrove       [Silver] [subscription] [SO... Marketp... | c compare selected                              
+                                                                                  |                                                 
+                                                                                  |                                                 
+------------------------------------------------------------------------------------------------------------------------------------
+j/k move | enter details | space mark | c compare selected | s search products | a ask | x remove | tab/l next pane | h previous ...
+------------------------------------------------------------------------------------------------------------------------------------

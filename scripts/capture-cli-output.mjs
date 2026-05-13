@@ -19,6 +19,16 @@ await captureTerminal("search-table-wide", [
   "160",
 ]);
 
+await captureTerminal("search-cards-narrow", [
+  "search",
+  "analytics",
+  "--no-links",
+  "--columns",
+  "64",
+  "--limit",
+  "4",
+]);
+
 await captureTerminal("browse-details-wide", [
   "browse",
   "analytics",
@@ -29,6 +39,34 @@ await captureTerminal("browse-details-wide", [
   "atlasmetrics,vectorgrove",
   "--pane",
   "details",
+  "--columns",
+  "132",
+]);
+
+await captureTerminal("browse-compare-wide", [
+  "browse",
+  "analytics",
+  "--snapshot",
+  "--selected",
+  "vectorgrove",
+  "--marked",
+  "atlasmetrics,vectorgrove",
+  "--pane",
+  "compare",
+  "--columns",
+  "132",
+]);
+
+await captureTerminal("browse-command-wide", [
+  "browse",
+  "analytics",
+  "--snapshot",
+  "--selected",
+  "vectorgrove",
+  "--pane",
+  "details",
+  "--command",
+  "search products",
   "--columns",
   "132",
 ]);

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="786" viewBox="0 0 540 786">
+  <rect width="100%" height="100%" rx="12" fill="#101418"/>
+  <rect x="1" y="1" width="538" height="784" rx="11" fill="none" stroke="#2c3540"/>
+  <circle cx="26" cy="22" r="5" fill="#e05d44"/>
+  <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
+  <circle cx="60" cy="22" r="5" fill="#54c571"/>
+  <g transform="translate(0 22)" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d7e0e8">
+  <text x="24" y="38">Flourisher search: &quot;analytics&quot;</text>
+  <text x="24" y="56">Backend: stubbed demo data. Showing 4 hard-coded results for</text>
+  <text x="24" y="74">every query.</text>
+  <text x="24" y="92"></text>
+  <text x="24" y="110">1. Atlas Metrics - @atlasmetrics</text>
+  <text x="24" y="128">   Website: https://example.com/atlas-metrics</text>
+  <text x="24" y="146">   Profile: https://flourisher.net/atlasmetrics</text>
+  <text x="24" y="164">   Stripe: Marketplace app: analytics</text>
+  <text x="24" y="182">   Status: Link: yes | Projects: yes | Verified: Gold</text>
+  <text x="24" y="200">   Project: https://flourisher.net/projects/atlasmetrics</text>
+  <text x="24" y="218">   Products: Cohort dashboards; KPI alerts</text>
+  <text x="24" y="236">   Users: Growth teams; SaaS founders</text>
+  <text x="24" y="254"></text>
+  <text x="24" y="272">2. Northstar Loop - @northstar</text>
+  <text x="24" y="290">   Website: https://example.com/northstar-loop</text>
+  <text x="24" y="308">   Profile: https://flourisher.net/northstar</text>
+  <text x="24" y="326">   Stripe: Embedded Connect partner</text>
+  <text x="24" y="344">   Status: Link: yes | Projects: yes | Verified: Silver</text>
+  <text x="24" y="362">   Project: https://flourisher.net/projects/northstar</text>
+  <text x="24" y="380">   Products: Creator payouts; usage billing</text>
+  <text x="24" y="398">   Users: Marketplaces; agencies</text>
+  <text x="24" y="416"></text>
+  <text x="24" y="434">3. Ledgerfield - @ledgerfield</text>
+  <text x="24" y="452">   Website: https://example.com/ledgerfield</text>
+  <text x="24" y="470">   Profile: https://flourisher.net/ledgerfield</text>
+  <text x="24" y="488">   Stripe: Verified extension</text>
+  <text x="24" y="506">   Status: Link: no | Projects: no | Verified: Gold</text>
+  <text x="24" y="524">   Products: Revenue recognition; exports</text>
+  <text x="24" y="542">   Users: Finance operators; controllers</text>
+  <text x="24" y="560"></text>
+  <text x="24" y="578">4. BrightCart - @brightcart</text>
+  <text x="24" y="596">   Website: https://example.com/brightcart</text>
+  <text x="24" y="614">   Profile: https://flourisher.net/brightcart</text>
+  <text x="24" y="632">   Stripe: Checkout plugin</text>
+  <text x="24" y="650">   Status: Link: yes | Projects: yes | Verified: Community</text>
+  <text x="24" y="668">   Project: https://flourisher.net/projects/brightcart</text>
+  <text x="24" y="686">   Products: Digital storefronts; bundles</text>
+  <text x="24" y="704">   Users: Solo sellers; newsletter shops</text>
+  <text x="24" y="722"></text>
+  <text x="24" y="740">Try: flourisher search analytics --output json --fields</text>
+  <text x="24" y="758">businessName,username,acceptsLink</text>
+  </g>
+</svg>

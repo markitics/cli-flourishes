@@ -1,27 +1,27 @@
 Flourisher search: "analytics"
 Backend: stubbed demo data. Showing 18 hard-coded results for every query.
 
-+--------------------+-------------------+------------------------------+--------+-----------+------------+--------------------------------+----------------------------------+
-| Business           | Profile           | Stripe                       | Link   | Projects  | Verified   | Products                       | Who uses them                    |
-+--------------------+-------------------+------------------------------+--------+-----------+------------+--------------------------------+----------------------------------+
-| Atlas Metrics      | @atlasmetrics     | Marketplace app: analytics   | yes    | yes       | Gold       | Cohort dashboards; KPI alerts  | Growth teams; SaaS founders      |
-| Northstar Loop     | @northstar        | Embedded Connect partner     | yes    | yes       | Silver     | Creator payouts; usage billing | Marketplaces; agencies           |
-| Ledgerfield        | @ledgerfield      | Verified extension           | no     | no        | Gold       | Revenue recognition; exports   | Finance operators; controllers   |
-| BrightCart         | @brightcart       | Checkout plugin              | yes    | yes       | Community  | Digital storefronts; bundles   | Solo sellers; newsletter shops   |
-| Signal Orchard     | @signalorchard    | Marketplace app: reporting   | yes    | no        | Silver     | MRR trend reports; scorecards  | RevOps; investors                |
-| Harbor Grid        | @harborgrid       | Custom integration           | no     | yes       | Pilot      | Procurement workflows; appr... | Operations teams; B2B buyers     |
-| PulseFoundry       | @pulsefoundry     | Billing portal add-on        | yes    | yes       | Gold       | Customer health; renewal nu... | Customer success; founders       |
-| Kiteplane          | @kiteplane        | No public listing            | yes    | no        | Unverified | Usage metering; entitlement... | API companies; platform teams    |
-| Mosaic Ledger      | @mosaicledger     | Marketplace app: finance     | yes    | yes       | Gold       | Close automation; anomaly r... | Bookkeepers; fractional CFOs     |
-| Launchlane         | @launchlane       | Payment Links specialist     | yes    | no        | Community  | Landing pages; preorders       | Indie makers; course creators    |
-| Copper Canary      | @coppercanary     | Radar companion              | no     | yes       | Silver     | Fraud review queues; alerts    | Risk teams; support leads        |
-| Ribbon Desk        | @ribbondesk       | Support app integration      | yes    | yes       | Pilot      | Refund workflows; customer ... | Support teams; ecommerce ops     |
-| Summit Schema      | @summitschema     | Data pipeline partner        | yes    | no        | Gold       | Warehouse sync; dbt models     | Data teams; analytics engineers  |
-| Fieldnote Pay      | @fieldnotepay     | Terminal services partner    | no     | yes       | Silver     | In-person checkout; receipts   | Studios; event operators         |
-| Beacon Basket      | @beaconbasket     | Checkout plugin              | yes    | no        | Community  | Gift cards; cart recovery      | Retailers; membership clubs      |
-| Quota Studio       | @quotastudio      | Subscription toolkit         | yes    | yes       | Gold       | Plans; trials; cancellation... | B2B SaaS; product teams          |
-| Fairwater Labs     | @fairwater        | Custom integration           | no     | no        | Pilot      | Pricing experiments; surveys   | Product marketers; founders      |
-| Vector Grove       | @vectorgrove      | Marketplace app: analytics   | yes    | yes       | Silver     | Segment analysis; lead scoring | Sales teams; growth analysts     |
-+--------------------+-------------------+------------------------------+--------+-----------+------------+--------------------------------+----------------------------------+
++-----------------+----------------+----------------------+--------+----------+-----------+-----------------------+------------------------+
+| Business        | Profile        | Stripe               | Link   | Projects | Verified  | Products              | Who uses them          |
++-----------------+----------------+----------------------+--------+----------+-----------+-----------------------+------------------------+
+| Atlas Metrics   | @atlasmetrics  | Marketplace app: ... | yes    | yes      | Gold      | Cohort dashboards;... | Growth teams; SaaS ... |
+| Northstar Loop  | @northstar     | Embedded Connect ... | yes    | yes      | Silver    | Creator payouts; u... | Marketplaces; agencies |
+| Ledgerfield     | @ledgerfield   | Verified extension   | no     | no       | Gold      | Revenue recognitio... | Finance operators; ... |
+| BrightCart      | @brightcart    | Checkout plugin      | yes    | yes      | Community | Digital storefront... | Solo sellers; newsl... |
+| Signal Orchard  | @signalorchard | Marketplace app: ... | yes    | no       | Silver    | MRR trend reports;... | RevOps; investors      |
+| Harbor Grid     | @harborgrid    | Custom integration   | no     | yes      | Pilot     | Procurement workfl... | Operations teams; B... |
+| PulseFoundry    | @pulsefoundry  | Billing portal ad... | yes    | yes      | Gold      | Customer health; r... | Customer success; f... |
+| Kiteplane       | @kiteplane     | No public listing    | yes    | no       | Unveri... | Usage metering; en... | API companies; plat... |
+| Mosaic Ledger   | @mosaicledger  | Marketplace app: ... | yes    | yes      | Gold      | Close automation; ... | Bookkeepers; fracti... |
+| Launchlane      | @launchlane    | Payment Links spe... | yes    | no       | Community | Landing pages; pre... | Indie makers; cours... |
+| Copper Canary   | @coppercanary  | Radar companion      | no     | yes      | Silver    | Fraud review queue... | Risk teams; support... |
+| Ribbon Desk     | @ribbondesk    | Support app integ... | yes    | yes      | Pilot     | Refund workflows; ... | Support teams; ecom... |
+| Summit Schema   | @summitschema  | Data pipeline par... | yes    | no       | Gold      | Warehouse sync; db... | Data teams; analyti... |
+| Fieldnote Pay   | @fieldnotepay  | Terminal services... | no     | yes      | Silver    | In-person checkout... | Studios; event oper... |
+| Beacon Basket   | @beaconbasket  | Checkout plugin      | yes    | no       | Community | Gift cards; cart r... | Retailers; membersh... |
+| Quota Studio    | @quotastudio   | Subscription toolkit | yes    | yes      | Gold      | Plans; trials; can... | B2B SaaS; product t... |
+| Fairwater Labs  | @fairwater     | Custom integration   | no     | no       | Pilot     | Pricing experiment... | Product marketers; ... |
+| Vector Grove    | @vectorgrove   | Marketplace app: ... | yes    | yes      | Silver    | Segment analysis; ... | Sales teams; growth... |
++-----------------+----------------+----------------------+--------+----------+-----------+-----------------------+------------------------+
 
 Try: flourisher search analytics --output json --fields businessName,username,acceptsLink

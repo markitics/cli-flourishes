@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1483" height="534" viewBox="0 0 1483 534">
+<svg xmlns="http://www.w3.org/2000/svg" width="1196" height="534" viewBox="0 0 1196 534">
   <rect width="100%" height="100%" rx="12" fill="#101418"/>
-  <rect x="1" y="1" width="1481" height="532" rx="11" fill="none" stroke="#2c3540"/>
+  <rect x="1" y="1" width="1194" height="532" rx="11" fill="none" stroke="#2c3540"/>
   <circle cx="26" cy="22" r="5" fill="#e05d44"/>
   <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
   <circle cx="60" cy="22" r="5" fill="#54c571"/>
@@ -8,28 +8,28 @@
   <text x="24" y="38">Flourisher search: &quot;analytics&quot;</text>
   <text x="24" y="56">Backend: stubbed demo data. Showing 18 hard-coded results for every query.</text>
   <text x="24" y="74"></text>
-  <text x="24" y="92">+--------------------+-------------------+------------------------------+--------+-----------+------------+--------------------------------+----------------------------------+</text>
-  <text x="24" y="110">| Business           | Profile           | Stripe                       | Link   | Projects  | Verified   | Products                       | Who uses them                    |</text>
-  <text x="24" y="128">+--------------------+-------------------+------------------------------+--------+-----------+------------+--------------------------------+----------------------------------+</text>
-  <text x="24" y="146">| Atlas Metrics      | @atlasmetrics     | Marketplace app: analytics   | yes    | yes       | Gold       | Cohort dashboards; KPI alerts  | Growth teams; SaaS founders      |</text>
-  <text x="24" y="164">| Northstar Loop     | @northstar        | Embedded Connect partner     | yes    | yes       | Silver     | Creator payouts; usage billing | Marketplaces; agencies           |</text>
-  <text x="24" y="182">| Ledgerfield        | @ledgerfield      | Verified extension           | no     | no        | Gold       | Revenue recognition; exports   | Finance operators; controllers   |</text>
-  <text x="24" y="200">| BrightCart         | @brightcart       | Checkout plugin              | yes    | yes       | Community  | Digital storefronts; bundles   | Solo sellers; newsletter shops   |</text>
-  <text x="24" y="218">| Signal Orchard     | @signalorchard    | Marketplace app: reporting   | yes    | no        | Silver     | MRR trend reports; scorecards  | RevOps; investors                |</text>
-  <text x="24" y="236">| Harbor Grid        | @harborgrid       | Custom integration           | no     | yes       | Pilot      | Procurement workflows; appr... | Operations teams; B2B buyers     |</text>
-  <text x="24" y="254">| PulseFoundry       | @pulsefoundry     | Billing portal add-on        | yes    | yes       | Gold       | Customer health; renewal nu... | Customer success; founders       |</text>
-  <text x="24" y="272">| Kiteplane          | @kiteplane        | No public listing            | yes    | no        | Unverified | Usage metering; entitlement... | API companies; platform teams    |</text>
-  <text x="24" y="290">| Mosaic Ledger      | @mosaicledger     | Marketplace app: finance     | yes    | yes       | Gold       | Close automation; anomaly r... | Bookkeepers; fractional CFOs     |</text>
-  <text x="24" y="308">| Launchlane         | @launchlane       | Payment Links specialist     | yes    | no        | Community  | Landing pages; preorders       | Indie makers; course creators    |</text>
-  <text x="24" y="326">| Copper Canary      | @coppercanary     | Radar companion              | no     | yes       | Silver     | Fraud review queues; alerts    | Risk teams; support leads        |</text>
-  <text x="24" y="344">| Ribbon Desk        | @ribbondesk       | Support app integration      | yes    | yes       | Pilot      | Refund workflows; customer ... | Support teams; ecommerce ops     |</text>
-  <text x="24" y="362">| Summit Schema      | @summitschema     | Data pipeline partner        | yes    | no        | Gold       | Warehouse sync; dbt models     | Data teams; analytics engineers  |</text>
-  <text x="24" y="380">| Fieldnote Pay      | @fieldnotepay     | Terminal services partner    | no     | yes       | Silver     | In-person checkout; receipts   | Studios; event operators         |</text>
-  <text x="24" y="398">| Beacon Basket      | @beaconbasket     | Checkout plugin              | yes    | no        | Community  | Gift cards; cart recovery      | Retailers; membership clubs      |</text>
-  <text x="24" y="416">| Quota Studio       | @quotastudio      | Subscription toolkit         | yes    | yes       | Gold       | Plans; trials; cancellation... | B2B SaaS; product teams          |</text>
-  <text x="24" y="434">| Fairwater Labs     | @fairwater        | Custom integration           | no     | no        | Pilot      | Pricing experiments; surveys   | Product marketers; founders      |</text>
-  <text x="24" y="452">| Vector Grove       | @vectorgrove      | Marketplace app: analytics   | yes    | yes       | Silver     | Segment analysis; lead scoring | Sales teams; growth analysts     |</text>
-  <text x="24" y="470">+--------------------+-------------------+------------------------------+--------+-----------+------------+--------------------------------+----------------------------------+</text>
+  <text x="24" y="92">+-----------------+----------------+----------------------+--------+----------+-----------+-----------------------+------------------------+</text>
+  <text x="24" y="110">| Business        | Profile        | Stripe               | Link   | Projects | Verified  | Products              | Who uses them          |</text>
+  <text x="24" y="128">+-----------------+----------------+----------------------+--------+----------+-----------+-----------------------+------------------------+</text>
+  <text x="24" y="146">| Atlas Metrics   | @atlasmetrics  | Marketplace app: ... | yes    | yes      | Gold      | Cohort dashboards;... | Growth teams; SaaS ... |</text>
+  <text x="24" y="164">| Northstar Loop  | @northstar     | Embedded Connect ... | yes    | yes      | Silver    | Creator payouts; u... | Marketplaces; agencies |</text>
+  <text x="24" y="182">| Ledgerfield     | @ledgerfield   | Verified extension   | no     | no       | Gold      | Revenue recognitio... | Finance operators; ... |</text>
+  <text x="24" y="200">| BrightCart      | @brightcart    | Checkout plugin      | yes    | yes      | Community | Digital storefront... | Solo sellers; newsl... |</text>
+  <text x="24" y="218">| Signal Orchard  | @signalorchard | Marketplace app: ... | yes    | no       | Silver    | MRR trend reports;... | RevOps; investors      |</text>
+  <text x="24" y="236">| Harbor Grid     | @harborgrid    | Custom integration   | no     | yes      | Pilot     | Procurement workfl... | Operations teams; B... |</text>
+  <text x="24" y="254">| PulseFoundry    | @pulsefoundry  | Billing portal ad... | yes    | yes      | Gold      | Customer health; r... | Customer success; f... |</text>
+  <text x="24" y="272">| Kiteplane       | @kiteplane     | No public listing    | yes    | no       | Unveri... | Usage metering; en... | API companies; plat... |</text>
+  <text x="24" y="290">| Mosaic Ledger   | @mosaicledger  | Marketplace app: ... | yes    | yes      | Gold      | Close automation; ... | Bookkeepers; fracti... |</text>
+  <text x="24" y="308">| Launchlane      | @launchlane    | Payment Links spe... | yes    | no       | Community | Landing pages; pre... | Indie makers; cours... |</text>
+  <text x="24" y="326">| Copper Canary   | @coppercanary  | Radar companion      | no     | yes      | Silver    | Fraud review queue... | Risk teams; support... |</text>
+  <text x="24" y="344">| Ribbon Desk     | @ribbondesk    | Support app integ... | yes    | yes      | Pilot     | Refund workflows; ... | Support teams; ecom... |</text>
+  <text x="24" y="362">| Summit Schema   | @summitschema  | Data pipeline par... | yes    | no       | Gold      | Warehouse sync; db... | Data teams; analyti... |</text>
+  <text x="24" y="380">| Fieldnote Pay   | @fieldnotepay  | Terminal services... | no     | yes      | Silver    | In-person checkout... | Studios; event oper... |</text>
+  <text x="24" y="398">| Beacon Basket   | @beaconbasket  | Checkout plugin      | yes    | no       | Community | Gift cards; cart r... | Retailers; membersh... |</text>
+  <text x="24" y="416">| Quota Studio    | @quotastudio   | Subscription toolkit | yes    | yes      | Gold      | Plans; trials; can... | B2B SaaS; product t... |</text>
+  <text x="24" y="434">| Fairwater Labs  | @fairwater     | Custom integration   | no     | no       | Pilot     | Pricing experiment... | Product marketers; ... |</text>
+  <text x="24" y="452">| Vector Grove    | @vectorgrove   | Marketplace app: ... | yes    | yes      | Silver    | Segment analysis; ... | Sales teams; growth... |</text>
+  <text x="24" y="470">+-----------------+----------------+----------------------+--------+----------+-----------+-----------------------+------------------------+</text>
   <text x="24" y="488"></text>
   <text x="24" y="506">Try: flourisher search analytics --output json --fields businessName,username,acceptsLink</text>
   </g>
