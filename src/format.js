@@ -4,7 +4,10 @@ import { liveBackendContract } from "./provider.js";
 const RESET = "\x1b[0m";
 const DIM = "\x1b[2m";
 const BOLD = "\x1b[1m";
+const CYAN = "\x1b[36m";
 const GREEN = "\x1b[32m";
+const MAGENTA = "\x1b[35m";
+const RED = "\x1b[31m";
 const YELLOW = "\x1b[33m";
 
 const TABLE_FIELDS = [
@@ -461,6 +464,7 @@ function formatStackedSearch(results, columns, options) {
     }
     appendFieldValue(lines, result, "stripeIntegration", columns, "Stripe", null, options);
     appendStatusLine(lines, result, columns, options);
+    appendSearchTags(lines, result, options);
     if (hasColumn(columns, "projects")) {
       appendLinkedValue(
         lines,
@@ -526,6 +530,22 @@ function appendStatusLine(lines, result, columns, options) {
   if (pieces.length === 0) return;
   const display = pieces.join(" | ");
   appendLabeledValue(lines, "Status", colorSignal(display, display, "verified", options.color), display, options.width);
+}
+
+function appendSearchTags(lines, result, options) {
+  const tags = [
+    tagParts(result.verified, verificationTone(result.verified), options.color),
+    tagParts(paymentTypeForSearch(result), "payment", options.color),
+    tagParts(complianceForSearch(result), complianceTone(complianceForSearch(result)), options.color),
+    tagParts(integrationDepthForSearch(result), "info", options.color),
+  ];
+  appendLabeledValue(
+    lines,
+    "Tags",
+    tags.map((item) => item.rendered).join(" "),
+    tags.map((item) => item.display).join(" "),
+    options.width,
+  );
 }
 
 function appendLinkedValue(lines, label, value, url, options) {
@@ -629,6 +649,69 @@ function colorSignal(rendered, display, key, enabled) {
     return colorize(rendered, YELLOW, true);
   }
   return rendered;
+}
+
+function tagParts(label, tone, color) {
+  const display = `[${label}]`;
+  return {
+    display,
+    rendered: colorize(display, toneColor(tone), color),
+  };
+}
+
+function verificationTone(value) {
+  if (value === "Gold") return "good";
+  if (value === "Silver") return "info";
+  if (value === "Pilot" || value === "Community") return "warn";
+  return "bad";
+}
+
+function complianceTone(value) {
+  if (value === "SOC2") return "good";
+  if (value.includes("pending")) return "warn";
+  if (value === "unverified") return "bad";
+  return "info";
+}
+
+function toneColor(tone) {
+  return {
+    good: GREEN,
+    info: CYAN,
+    warn: YELLOW,
+    bad: RED,
+    payment: MAGENTA,
+  }[tone] ?? CYAN;
+}
+
+function paymentTypeForSearch(result) {
+  const stripe = result.stripeIntegration.toLowerCase();
+  const products = result.products.toLowerCase();
+  if (products.includes("subscription") || products.includes("plans") || products.includes("trials")) {
+    return "subscription";
+  }
+  if (stripe.includes("checkout") || stripe.includes("payment links") || stripe.includes("terminal")) {
+    return "one-time payment";
+  }
+  if (stripe.includes("connect") || stripe.includes("marketplace")) {
+    return "marketplace payouts";
+  }
+  return "workflow";
+}
+
+function complianceForSearch(result) {
+  if (result.verified === "Gold") return "SOC2";
+  if (result.verified === "Silver") return "SOC2 pending";
+  if (result.verified === "Pilot") return "customer refs";
+  if (result.verified === "Community") return "public docs";
+  return "unverified";
+}
+
+function integrationDepthForSearch(result) {
+  const stripe = result.stripeIntegration.toLowerCase();
+  if (stripe.includes("marketplace app") || stripe.includes("verified")) return "listed app";
+  if (stripe.includes("custom") || stripe.includes("embedded")) return "deep integration";
+  if (stripe.includes("plugin") || stripe.includes("payment links")) return "light integration";
+  return "partner signal";
 }
 
 function colorize(value, code, enabled) {
