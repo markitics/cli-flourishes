@@ -30,11 +30,18 @@ High-confidence patterns from the first pass:
   links it and attributes the line "2026 is the year of Skills & CLIs." Treat
   that quote as secondary-sourced until a browser screenshot is captured.
 
-## Planned Files
+## Research Notes
 
-- `human-tui-patterns.md`: human-oriented terminal UX patterns.
-- `agent-output-contracts.md`: agent-friendly CLI/API contracts.
-- Individual example notes for GitHub CLI, Google Workspace CLI, Vercel CLI,
-  Kubernetes/Terraform, and Charm/fuzzy/TUI tools.
-- `source-log.md`: dated list of source links and screenshot follow-ups.
-
+- [Human TUI Patterns](human-tui-patterns.md): keyboard-first panes, command
+  strips, previews, tags, and responsive terminal layouts.
+- [Agent Output Contracts](agent-output-contracts.md): bounded JSON, field
+  masks, describe commands, dry runs, pagination, and safety rails.
+- [Google Workspace and Vercel](google-workspace-and-vercel.md): modern
+  agent-first CLI surfaces worth studying.
+- [GitHub, Terraform, and Stripe](github-terraform-stripe.md): mature command
+  contracts that combine human workflows with machine-readable output.
+- [fzf and Charm Tools](fzf-and-charm.md): human-friendly terminal interaction
+  patterns for fuzzy search, previews, and polished TUIs.
+- [Flourisher Design Backlog](flourisher-design-backlog.md): concrete ideas
+  to keep building from this research.
+- [Source Log](source-log.md): dated links and screenshot follow-ups.
