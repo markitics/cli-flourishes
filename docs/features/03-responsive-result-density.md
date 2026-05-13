@@ -27,9 +27,10 @@ The command can select a layout by terminal width:
 - Wide: full set of current columns.
 - Detail view: one row transposed into a two-column key/value panel.
 
-The current implementation already accepts `--wide`, `--compact`, and
-`--columns <n>` to make the table deterministic during demos and screenshot
-generation.
+The current implementation accepts `--wide`, `--compact`, and `--columns <n>`
+to make search output deterministic during demos and screenshot generation. If
+the selected table cannot fit the declared width, search falls back to wrapped
+stacked results instead of letting table rows spill past the terminal.
 
 ## Resize behavior
 

@@ -24,7 +24,7 @@ const TABLE_FIELDS = [
   {
     key: "stripeIntegration",
     label: "Stripe",
-    width: { wide: 28, regular: 20, compact: 18 },
+    width: { wide: 28, regular: 20, compact: 16 },
   },
   {
     key: "acceptsLink",
@@ -47,36 +47,45 @@ const TABLE_FIELDS = [
   {
     key: "products",
     label: "Products",
-    width: { wide: 30, regular: 21, compact: 18 },
+    width: { wide: 30, regular: 21, compact: 15 },
   },
   {
     key: "users",
     label: "Who uses them",
-    width: { wide: 32, regular: 22, compact: 19 },
+    width: { wide: 32, regular: 22, compact: 15 },
   },
 ];
 
 export function formatTable(results, options = {}) {
-  const mode = tableMode(options.columns, options.layout);
   const columns = TABLE_FIELDS.filter((field) => {
     if (!options.fields || options.fields.length === 0) return true;
     return options.fields.includes(field.key);
   });
   const color = options.color ?? false;
   const links = options.links ?? false;
-  const header = [
-    colorize(`Flourisher search: "${options.query}"`, BOLD, color),
-    colorize(
-      `Backend: stubbed demo data. Showing ${results.length} hard-coded results for every query.`,
-      DIM,
-      color,
-    ),
-    "",
+  const width = terminalWidth(options.columns);
+  const mode = searchTableMode(columns, width, options.layout);
+  const headerText = [
+    `Flourisher search: "${options.query}"`,
+    `Backend: stubbed demo data. Showing ${results.length} hard-coded results for every query.`,
   ];
+  const tryText = "Try: flourisher search analytics --output json --fields businessName,username,acceptsLink";
+
+  if (!mode) {
+    return formatStackedSearch(results, columns, {
+      color,
+      links,
+      width,
+      headerText,
+      tryText,
+    });
+  }
 
   const border = makeBorder(columns, mode);
   const lines = [
-    ...header,
+    colorize(headerText[0], BOLD, color),
+    colorize(headerText[1], DIM, color),
+    "",
     border.top,
     row(columns.map((field) => field.label), columns, mode, { color, header: true }),
     border.sep,
@@ -89,11 +98,7 @@ export function formatTable(results, options = {}) {
     }),
     border.bottom,
     "",
-    colorize(
-      "Try: flourisher search analytics --output json --fields businessName,username,acceptsLink",
-      DIM,
-      color,
-    ),
+    colorize(tryText, DIM, color),
   ];
 
   return `${lines.join("\n")}\n`;
@@ -383,6 +388,23 @@ function makeBorder(columns, mode) {
   };
 }
 
+function searchTableMode(columns, width, requested) {
+  const candidates = requestedModes(requested);
+  return candidates.find((mode) => tableWidth(columns, mode) <= width) ?? null;
+}
+
+function requestedModes(requested) {
+  if (requested === "wide") return ["wide", "regular", "compact"];
+  if (requested === "regular") return ["regular", "compact"];
+  if (requested === "compact") return ["compact"];
+  return ["wide", "regular", "compact"];
+}
+
+function tableWidth(columns, mode) {
+  const contentWidth = columns.reduce((total, field) => total + field.width[mode] + 2, 0);
+  return contentWidth + columns.length + 1;
+}
+
 function tableMode(columns = 120, requested) {
   if (requested === "wide" || requested === "regular" || requested === "compact") {
     return requested;
@@ -401,6 +423,176 @@ function selectFields(results, fields) {
 
 function yesNo(value) {
   return value ? "yes" : "no";
+}
+
+function terminalWidth(columns) {
+  const width = Number(columns);
+  if (!Number.isFinite(width) || width < 20) return 80;
+  return Math.floor(width);
+}
+
+function formatStackedSearch(results, columns, options) {
+  const lines = [
+    ...wrapStyledText(options.headerText[0], options.width, BOLD, options.color),
+    ...wrapStyledText(options.headerText[1], options.width, DIM, options.color),
+    "",
+  ];
+
+  results.forEach((result, index) => {
+    const numberPrefix = `${index + 1}. `;
+    const heading = resultHeading(result, columns, options);
+    appendWrappedValue(lines, numberPrefix, heading.rendered, heading.display, options.width);
+
+    if (hasColumn(columns, "businessName")) {
+      appendLinkedValue(lines, "Website", result.website, result.website, options);
+    }
+    if (hasColumn(columns, "username")) {
+      appendLinkedValue(lines, "Profile", result.profileUrl, result.profileUrl, options);
+    }
+    appendFieldValue(lines, result, "stripeIntegration", columns, "Stripe", null, options);
+    appendStatusLine(lines, result, columns, options);
+    if (hasColumn(columns, "projects")) {
+      appendLinkedValue(
+        lines,
+        "Project",
+        result.projects ? result.projectUrl : null,
+        result.projects ? result.projectUrl : null,
+        options,
+      );
+    }
+    appendFieldValue(lines, result, "products", columns, "Products", null, options);
+    appendFieldValue(lines, result, "users", columns, "Users", null, options);
+
+    if (index < results.length - 1) lines.push("");
+  });
+
+  lines.push("");
+  lines.push(...wrapStyledText(options.tryText, options.width, DIM, options.color));
+
+  return `${lines.join("\n")}\n`;
+}
+
+function resultHeading(result, columns, options) {
+  const pieces = [];
+  if (hasColumn(columns, "businessName")) {
+    pieces.push({
+      rendered: hyperlink(result.businessName, result.website, options.links),
+      display: result.businessName,
+    });
+  }
+  if (hasColumn(columns, "username")) {
+    const username = `@${result.username}`;
+    pieces.push({
+      rendered: hyperlink(username, result.profileUrl, options.links),
+      display: username,
+    });
+  }
+
+  if (pieces.length === 0) {
+    return { rendered: "Result", display: "Result" };
+  }
+
+  return joinRendered(pieces, " - ");
+}
+
+function appendFieldValue(lines, result, key, columns, label, url, options) {
+  if (!hasColumn(columns, key)) return;
+  const raw = result[key];
+  const display = String(raw ?? "");
+  const rendered = hyperlink(display, url, options.links);
+  appendLabeledValue(lines, label, rendered, display, options.width, url, options.links);
+}
+
+function appendStatusLine(lines, result, columns, options) {
+  const statusFields = [
+    ["acceptsLink", "Link", yesNo(result.acceptsLink)],
+    ["projects", "Projects", yesNo(result.projects)],
+    ["verified", "Verified", result.verified],
+  ];
+  const pieces = statusFields
+    .filter(([key]) => hasColumn(columns, key))
+    .map(([, label, value]) => `${label}: ${value}`);
+
+  if (pieces.length === 0) return;
+  const display = pieces.join(" | ");
+  appendLabeledValue(lines, "Status", colorSignal(display, display, "verified", options.color), display, options.width);
+}
+
+function appendLinkedValue(lines, label, value, url, options) {
+  if (!value) return;
+  const display = String(value);
+  appendLabeledValue(lines, label, hyperlink(display, url, options.links), display, options.width, url, options.links);
+}
+
+function appendLabeledValue(lines, label, rendered, display, width, url = null, links = false) {
+  appendWrappedValue(lines, `   ${label}: `, rendered, display, width, url, links);
+}
+
+function appendWrappedValue(lines, prefix, rendered, display, width, url = null, links = false) {
+  const continuationPrefix = " ".repeat(prefix.length);
+  const available = Math.max(1, width - prefix.length);
+  const chunks = wrapText(display, available);
+
+  chunks.forEach((chunk, index) => {
+    const linePrefix = index === 0 ? prefix : continuationPrefix;
+    const renderedChunk = chunks.length === 1 && chunk === display
+      ? rendered
+      : hyperlink(chunk, url, links);
+    lines.push(`${linePrefix}${renderedChunk}`);
+  });
+}
+
+function wrapStyledText(text, width, style, color) {
+  return wrapText(text, width).map((line) => colorize(line, style, color));
+}
+
+function wrapText(value, width) {
+  const normalized = String(value).replace(/\s+/g, " ").trim();
+  const safeWidth = Math.max(1, width);
+  if (!normalized) return [""];
+
+  const lines = [];
+  let current = "";
+
+  for (const word of normalized.split(" ")) {
+    const chunks = splitLongWord(word, safeWidth);
+    for (const chunk of chunks) {
+      if (!current) {
+        current = chunk;
+      } else if (current.length + 1 + chunk.length <= safeWidth) {
+        current = `${current} ${chunk}`;
+      } else {
+        lines.push(current);
+        current = chunk;
+      }
+    }
+  }
+
+  if (current) lines.push(current);
+  return lines;
+}
+
+function splitLongWord(word, width) {
+  if (word.length <= width) return [word];
+  const chunks = [];
+  for (let index = 0; index < word.length; index += width) {
+    chunks.push(word.slice(index, index + width));
+  }
+  return chunks;
+}
+
+function hasColumn(columns, key) {
+  return columns.some((column) => column.key === key);
+}
+
+function joinRendered(pieces, separator) {
+  return pieces.reduce((joined, piece) => {
+    if (!joined) return piece;
+    return {
+      rendered: `${joined.rendered}${separator}${piece.rendered}`,
+      display: `${joined.display}${separator}${piece.display}`,
+    };
+  }, null);
 }
 
 function truncate(value, width) {

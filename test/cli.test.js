@@ -11,6 +11,10 @@ function run(args, options = {}) {
   });
 }
 
+function maxLineLength(output) {
+  return Math.max(...output.trimEnd().split("\n").map((line) => line.length));
+}
+
 test("search renders the hard-coded table for any term", () => {
   const analytics = run(["search", "analytics", "--no-links", "--columns", "160"]);
   const billing = run(["search", "billing", "--no-links", "--columns", "160"]);
@@ -21,8 +25,20 @@ test("search renders the hard-coded table for any term", () => {
   assert.match(analytics.stdout, /Atlas Metrics/);
   assert.match(analytics.stdout, /Vector Grove/);
   assert.match(analytics.stdout, /Showing 18 hard-coded results/);
+  assert.ok(maxLineLength(analytics.stdout) <= 160);
   assert.match(billing.stdout, /Flourisher search: "billing"/);
   assert.match(billing.stdout, /Showing 18 hard-coded results/);
+});
+
+test("search uses wrapped stacked output when the table cannot fit", () => {
+  const result = run(["search", "analytics", "--no-links", "--columns", "64"]);
+
+  assert.equal(result.status, 0);
+  assert.ok(maxLineLength(result.stdout) <= 64);
+  assert.doesNotMatch(result.stdout, /^\+/m);
+  assert.match(result.stdout, /1\. Atlas Metrics - @atlasmetrics/);
+  assert.match(result.stdout, /Website: https:\/\/example.com\/atlas-metrics/);
+  assert.match(result.stdout, /Profile: https:\/\/flourisher.net\/atlasmetrics/);
 });
 
 test("json output is stable and field selectable", () => {
