@@ -12,7 +12,10 @@ The current CLI implements the first small subset:
 flourisher search "analytics" --output json
 flourisher search "analytics" --fields businessName,username,acceptsLink
 flourisher search "analytics" --limit 5
+flourisher search "analytics" --json --page-size 2 --cursor demo:2
+flourisher search "analytics" --json --explain --fields businessName,username
 flourisher describe search
+flourisher describe all
 ```
 
 ## Recommended flags
@@ -41,7 +44,12 @@ page numbers so results remain stable as the index changes.
 
 ```sh
 flourisher search "analytics" --output json --limit 5
+flourisher search "analytics" --json --page-size 2
+flourisher search "analytics" --json --page-size 2 --cursor demo:2
 ```
+
+Current cursor tokens are demo-only and shaped like `demo:2`; they prove the
+contract without implying a real backend cursor exists yet.
 
 ### `describe search`
 
@@ -51,6 +59,19 @@ types, allowed values, examples, and backend support status.
 
 ```sh
 flourisher describe search
+flourisher describe all
+```
+
+The current implementation now includes field types, enum values, examples,
+agent-safe command flags, and command examples.
+
+### `--explain`
+
+Use structured explanations when an agent needs enough context to decide what to
+do next without requesting every field.
+
+```sh
+flourisher search "analytics" --json --explain --fields businessName,username
 ```
 
 ### `--dry-run`
@@ -58,11 +79,8 @@ flourisher describe search
 Not needed for read-only search, but it should be mandatory for mutating future
 commands such as save, compare, note, export, or contact.
 
-### `--explain`
-
-For humans, explain why a row ranked. For agents, return a compact list of
-signals used. The important rule is that explanations must be structured, not
-free-form prose only.
+For now, explanations are display signals over fixed demo ordering, not a live
+ranking model.
 
 ### `--safe-output-dir`
 

@@ -1,3 +1,5 @@
+import { FIELD_CONTRACTS, commandContracts, explainResult } from "./contracts.js";
+
 const RESET = "\x1b[0m";
 const DIM = "\x1b[2m";
 const BOLD = "\x1b[1m";
@@ -104,8 +106,12 @@ export function formatJson(results, options = {}) {
       note: "All queries return the same hard-coded demo results.",
     },
     count: results.length,
+    page: options.page ?? null,
     results: selectFields(results, options.fields),
   };
+  if (options.explain) {
+    payload.explanations = results.map((result, index) => explainResult(result, index + (options.page?.offset ?? 0)));
+  }
 
   return `${JSON.stringify(payload, null, 2)}\n`;
 }
@@ -134,6 +140,7 @@ export function formatCsv(results, options = {}) {
 export function describeSearchCommand() {
   return `${JSON.stringify(
     {
+      version: 1,
       command: "flourisher search <term>",
       status: "demo",
       behavior: "Returns the same hard-coded result set for any term.",
@@ -141,24 +148,27 @@ export function describeSearchCommand() {
         "--output <table|json|csv>": "Choose human table output or machine-readable output.",
         "--fields <list>": "Comma-separated fields to return, useful for agents conserving context.",
         "--limit <n>": "Limit the number of demo rows returned.",
+        "--page-size <n>": "Return a cursor-shaped page of n demo rows.",
+        "--cursor <token>": "Resume from an opaque demo cursor such as demo:2.",
+        "--explain": "Include structured per-result display signals in JSON output.",
         "--no-links": "Disable terminal hyperlinks.",
         "--links": "Force terminal hyperlinks even when stdout is not a TTY.",
         "--wide": "Prefer wider columns for demos and screenshots.",
         "--compact": "Prefer narrower columns for small terminals.",
       },
-      fields: {
-        businessName: "Displayed as a hyperlink to website in table mode.",
-        website: "Business website URL.",
-        username: "Displayed as a hyperlink to profileUrl in table mode.",
-        profileUrl: "Flourisher profile URL.",
-        stripeIntegration: "Current or proposed Stripe surface.",
-        acceptsLink: "Whether the business accepts a direct link-style handoff.",
-        projects: "Whether a projects surface exists.",
-        projectUrl: "Project URL when available.",
-        verified: "Verification level.",
-        products: "Products sold or enabled.",
-        users: "Buyer or user profile.",
-      },
+      fields: FIELD_CONTRACTS,
+      examples: commandContracts().commands.find((command) => command.name === "search").examples,
+    },
+    null,
+    2,
+  )}\n`;
+}
+
+export function describeAllCommands() {
+  return `${JSON.stringify(
+    {
+      ...commandContracts(),
+      fields: FIELD_CONTRACTS,
     },
     null,
     2,

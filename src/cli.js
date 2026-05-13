@@ -1,6 +1,7 @@
 import { DEMO_RESULTS, RESULT_FIELDS } from "./data.js";
 import { runBrowseSession } from "./interactive.js";
 import {
+  describeAllCommands,
   describeCompareCommand,
   describeBrowseCommand,
   describeProfileCommand,
@@ -32,6 +33,11 @@ export async function run(argv, io) {
 
   if (parsed.options.version) {
     io.stdout.write(`flourisher ${VERSION}\n`);
+    return 0;
+  }
+
+  if (parsed.command === "describe" && (!parsed.positionals[0] || parsed.positionals[0] === "all")) {
+    io.stdout.write(describeAllCommands());
     return 0;
   }
 
@@ -91,8 +97,15 @@ export async function run(argv, io) {
     io.stderr.write(`${limit.message}\n`);
     return 1;
   }
+  const page = parsePageOptions(parsed.options, DEMO_RESULTS.length);
+  if (page instanceof Error) {
+    io.stderr.write(`${page.message}\n`);
+    return 1;
+  }
 
-  const results = DEMO_RESULTS.slice(0, limit ?? DEMO_RESULTS.length);
+  const effectiveLimit = page ? page.pageSize : limit;
+  const start = page ? page.offset : 0;
+  const results = DEMO_RESULTS.slice(start, start + (effectiveLimit ?? DEMO_RESULTS.length));
   if (parsed.options.interactive || parsed.options.snapshot) {
     if (parsed.options.output !== "table") {
       io.stderr.write("--interactive and --snapshot require table output\n");
@@ -108,6 +121,8 @@ export async function run(argv, io) {
     columns,
     fields: requestedFields,
     layout: parsed.options.layout,
+    explain: parsed.options.explain,
+    page,
   };
 
   if (parsed.options.output === "json") {
@@ -230,6 +245,9 @@ function parseArgs(argv) {
     output: "table",
     fields: null,
     limit: null,
+    pageSize: null,
+    cursor: null,
+    explain: false,
     help: false,
     version: false,
     noLinks: false,
@@ -291,6 +309,28 @@ function parseArgs(argv) {
     }
     if (arg.startsWith("--limit=")) {
       options.limit = arg.slice("--limit=".length);
+      continue;
+    }
+    if (arg === "--page-size") {
+      options.pageSize = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--page-size=")) {
+      options.pageSize = arg.slice("--page-size=".length);
+      continue;
+    }
+    if (arg === "--cursor") {
+      options.cursor = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--cursor=")) {
+      options.cursor = arg.slice("--cursor=".length);
+      continue;
+    }
+    if (arg === "--explain") {
+      options.explain = true;
       continue;
     }
     if (arg === "--no-links") {
@@ -416,6 +456,33 @@ function parseLimit(limit) {
   return value;
 }
 
+function parsePageOptions(options, total) {
+  if (!options.pageSize && !options.cursor) return null;
+  const pageSize = Number(options.pageSize ?? options.limit ?? 10);
+  if (!Number.isInteger(pageSize) || pageSize < 1) {
+    return new Error("--page-size must be a positive integer");
+  }
+  const offset = parseCursor(options.cursor);
+  if (offset instanceof Error) return offset;
+  const nextOffset = offset + pageSize;
+
+  return {
+    cursor: options.cursor ?? null,
+    offset,
+    pageSize,
+    returned: Math.max(0, Math.min(pageSize, total - offset)),
+    total,
+    nextCursor: nextOffset < total ? `demo:${nextOffset}` : null,
+  };
+}
+
+function parseCursor(cursor) {
+  if (!cursor) return 0;
+  const match = /^demo:(\d+)$/.exec(cursor);
+  if (!match) return new Error("--cursor must be an opaque demo cursor such as demo:2");
+  return Number(match[1]);
+}
+
 function supportsColor(env) {
   if (env.NO_COLOR) return false;
   if (env.FORCE_COLOR && env.FORCE_COLOR !== "0") return true;
@@ -442,6 +509,9 @@ Options
       --csv                      Alias for --output csv
       --fields <list>            Comma-separated fields to include
       --limit <n>                Limit the number of rows
+      --page-size <n>            Return a cursor-shaped page of n rows
+      --cursor <token>           Resume from a cursor such as demo:2
+      --explain                  Include JSON display signals
       --links                    Force terminal hyperlinks
       --no-links                 Disable terminal hyperlinks
       --wide                     Prefer wider table columns
@@ -460,6 +530,8 @@ Examples
   flourisher search "analytics"
   flourisher search "analytics" --wide
   flourisher search "analytics" --output json --fields businessName,username,acceptsLink
+  flourisher search "analytics" --json --page-size 2 --cursor demo:2
+  flourisher search "analytics" --json --explain --fields businessName,username
   flourisher search "analytics" --interactive
   flourisher browse "analytics" --snapshot --selected vectorgrove --pane details
   flourisher search "anything" --csv --limit 5
