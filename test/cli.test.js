@@ -62,7 +62,64 @@ test("describe search returns the machine-readable command contract", () => {
   assert.equal(result.status, 0);
   const payload = JSON.parse(result.stdout);
   assert.equal(payload.command, "flourisher search <term>");
-  assert.equal(payload.fields.businessName, "Displayed as a hyperlink to website in table mode.");
+  assert.equal(payload.fields[0].name, "businessName");
+  assert.equal(payload.fields.find((field) => field.name === "acceptsLink").type, "boolean");
+  assert.ok(payload.flags["--page-size <n>"]);
+});
+
+test("describe all returns command and field contracts", () => {
+  const result = run(["describe", "all"]);
+
+  assert.equal(result.status, 0);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.version, 1);
+  assert.deepEqual(payload.commands.map((command) => command.name), [
+    "search",
+    "browse",
+    "profile",
+    "compare",
+  ]);
+  assert.equal(payload.fields.find((field) => field.name === "verified").type, "enum");
+});
+
+test("json search supports cursor-shaped pages", () => {
+  const first = run(["search", "analytics", "--json", "--page-size", "2"]);
+  const second = run(["search", "analytics", "--json", "--page-size", "2", "--cursor", "demo:2"]);
+
+  assert.equal(first.status, 0);
+  assert.equal(second.status, 0);
+  const firstPayload = JSON.parse(first.stdout);
+  const secondPayload = JSON.parse(second.stdout);
+  assert.equal(firstPayload.page.nextCursor, "demo:2");
+  assert.equal(firstPayload.results[0].username, "atlasmetrics");
+  assert.equal(secondPayload.page.cursor, "demo:2");
+  assert.equal(secondPayload.results[0].username, "ledgerfield");
+});
+
+test("json search can include structured explanations", () => {
+  const result = run([
+    "search",
+    "analytics",
+    "--json",
+    "--limit",
+    "1",
+    "--explain",
+    "--fields",
+    "businessName,username",
+  ]);
+
+  assert.equal(result.status, 0);
+  const payload = JSON.parse(result.stdout);
+  assert.deepEqual(Object.keys(payload.results[0]), ["businessName", "username"]);
+  assert.equal(payload.explanations[0].username, "atlasmetrics");
+  assert.match(payload.explanations[0].note, /Demo ranking is fixed/);
+});
+
+test("invalid cursor fails with cursor guidance", () => {
+  const result = run(["search", "analytics", "--json", "--cursor", "bad"]);
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /--cursor must be an opaque demo cursor/);
 });
 
 test("profile renders a hard-coded detail view", () => {

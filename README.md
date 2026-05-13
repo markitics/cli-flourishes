@@ -21,6 +21,8 @@ npm link
 flourisher search "analytics"
 flourisher search "anything" --wide
 flourisher search "analytics" --output json --fields businessName,username,acceptsLink
+flourisher search "analytics" --json --page-size 2 --cursor demo:2
+flourisher search "analytics" --json --explain --fields businessName,username
 ```
 
 Without linking:
@@ -46,7 +48,8 @@ The default table includes:
 - Who uses them.
 
 The backend is intentionally stubbed. Run `flourisher describe search` for the
-machine-readable command contract.
+machine-readable command contract, or `flourisher describe all` for all command
+and field contracts.
 
 ## Interactive Browse
 
@@ -80,6 +83,8 @@ npm run capture
 node ./bin/flourisher.js search "analytics" --no-links --columns 160
 node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --pane details
 node ./bin/flourisher.js search "analytics" --output json --limit 2
+node ./bin/flourisher.js search "analytics" --json --page-size 2 --cursor demo:2
+node ./bin/flourisher.js describe all
 node ./bin/flourisher.js profile atlasmetrics
 node ./bin/flourisher.js compare atlasmetrics vectorgrove
 ```

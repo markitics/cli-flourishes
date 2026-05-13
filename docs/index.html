@@ -81,10 +81,24 @@
           </div>
           <div class="snippet">
             <div class="snippet-head">
-              <h3>Runtime contract</h3>
-              <button type="button" data-copy="node ./bin/flourisher.js describe search">Copy</button>
+              <h3>Cursor page</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js search &quot;analytics&quot; --json --page-size 2 --cursor demo:2">Copy</button>
             </div>
-            <pre><code>node ./bin/flourisher.js describe search</code></pre>
+            <pre><code>node ./bin/flourisher.js search "analytics" --json --page-size 2 --cursor demo:2</code></pre>
+          </div>
+          <div class="snippet">
+            <div class="snippet-head">
+              <h3>Explain signals</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js search &quot;analytics&quot; --json --explain --fields businessName,username">Copy</button>
+            </div>
+            <pre><code>node ./bin/flourisher.js search "analytics" --json --explain --fields businessName,username</code></pre>
+          </div>
+          <div class="snippet">
+            <div class="snippet-head">
+              <h3>Runtime contract</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js describe all">Copy</button>
+            </div>
+            <pre><code>node ./bin/flourisher.js describe all</code></pre>
           </div>
           <div class="snippet">
             <div class="snippet-head">
@@ -142,7 +156,8 @@
               <h3>Agent path</h3>
               <p>
                 JSON, CSV, field masks, limits, and <code>describe search</code>
-                avoid table scraping and reduce context usage.
+                avoid table scraping and reduce context usage. Cursor-shaped
+                pages and <code>--explain</code> keep agent reads compact.
               </p>
             </article>
             <article>
