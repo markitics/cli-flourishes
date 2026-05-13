@@ -14,8 +14,8 @@ the CLI.
 
 ## Rules
 
-- Prefer `--json` for reads unless the user explicitly asks for a human table or
-  screenshot.
+- Prefer `--json` or `--ndjson` for reads unless the user explicitly asks for a
+  human table or screenshot.
 - Use `--fields` on every search call. Do not fetch all fields when a small
   subset answers the question.
 - Use `--limit` or `--page-size` for exploratory calls.
@@ -40,6 +40,12 @@ flourisher search analytics --json --fields businessName,username,acceptsLink,ve
 flourisher search analytics --json --fields businessName,username,products,users --page-size 5
 ```
 
+### Stream result rows
+
+```sh
+flourisher search analytics --ndjson --fields businessName,username,products --limit 3
+```
+
 ### Render a human snapshot for review
 
 ```sh
@@ -62,6 +68,6 @@ flourisher browse analytics --snapshot --filter refund --columns 96
 
 - If a command fails on an unknown field, run `flourisher describe search` and
   choose from the returned field contract.
-- If terminal output wraps, add `--columns <n>` or switch to `--json`.
+- If terminal output wraps, add `--columns <n>` or switch to `--json`/`--ndjson`.
 - If the user asks for live backend freshness, say that this repo currently uses
   stubbed data and point to `docs/features/05-backend-contract.md`.

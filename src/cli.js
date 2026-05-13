@@ -10,11 +10,14 @@ import {
   formatComparison,
   formatComparisonCsv,
   formatComparisonJson,
+  formatComparisonNdjson,
   formatCsv,
   formatJson,
+  formatNdjson,
   formatProfile,
   formatProfileCsv,
   formatProfileJson,
+  formatProfileNdjson,
   formatTable,
 } from "./format.js";
 import { ENRICHED_RESULTS, findProfile, findProfiles } from "./profiles.js";
@@ -144,6 +147,11 @@ export async function run(argv, io) {
     return 0;
   }
 
+  if (parsed.options.output === "ndjson") {
+    io.stdout.write(formatNdjson(results, renderOptions));
+    return 0;
+  }
+
   io.stdout.write(formatTable(results, renderOptions));
   return 0;
 }
@@ -211,6 +219,11 @@ function renderProfile(parsed, io, context) {
     return 0;
   }
 
+  if (parsed.options.output === "ndjson") {
+    io.stdout.write(formatProfileNdjson(profile));
+    return 0;
+  }
+
   io.stdout.write(formatProfile(profile, {
     color: context.color,
     columns: context.columns,
@@ -241,6 +254,11 @@ function renderCompare(parsed, io, context) {
 
   if (parsed.options.output === "csv") {
     io.stdout.write(formatComparisonCsv(profiles));
+    return 0;
+  }
+
+  if (parsed.options.output === "ndjson") {
+    io.stdout.write(formatComparisonNdjson(profiles));
     return 0;
   }
 
@@ -298,6 +316,10 @@ function parseArgs(argv) {
     }
     if (arg === "--csv") {
       options.output = "csv";
+      continue;
+    }
+    if (arg === "--ndjson") {
+      options.output = "ndjson";
       continue;
     }
     if (arg === "--output" || arg === "-o") {
@@ -483,8 +505,8 @@ function readValue(argv, index, flag) {
 }
 
 function validateOutput(output) {
-  if (!["table", "json", "csv"].includes(output)) {
-    throw new Error(`--output must be one of table, json, csv; got ${output}`);
+  if (!["table", "json", "csv", "ndjson"].includes(output)) {
+    throw new Error(`--output must be one of table, json, csv, ndjson; got ${output}`);
   }
 }
 
@@ -529,9 +551,11 @@ Search behavior
   The future version can swap the stub for a backend without changing the UX contract.
 
 Options
-  -o, --output <table|json|csv>  Output format. Default: table
+  -o, --output <table|json|csv|ndjson>
+                                  Output format. Default: table
       --json                     Alias for --output json
       --csv                      Alias for --output csv
+      --ndjson                   Alias for --output ndjson
       --fields <list>            Comma-separated fields to include
       --limit <n>                Limit the number of rows
       --page-size <n>            Return a cursor-shaped page of n rows
@@ -560,6 +584,7 @@ Examples
   flourisher search "analytics" --wide
   flourisher search "analytics" --output json --fields businessName,username,acceptsLink
   flourisher search "analytics" --json --page-size 2 --cursor demo:2
+  flourisher search "analytics" --ndjson --fields businessName,username --limit 3
   flourisher search "analytics" --json --explain --fields businessName,username
   flourisher search "analytics" --interactive
   flourisher browse "analytics" --snapshot --selected vectorgrove --pane details
