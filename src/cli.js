@@ -179,6 +179,7 @@ function renderBrowseWithQuery(query, parsed, io, context) {
     selected: parsed.options.selected,
     marked: parsed.options.marked,
     hidden: parsed.options.hidden,
+    filter: parsed.options.filter,
     markSelected: parsed.options.markSelected,
     pane: parsed.options.pane,
     command: parsed.options.command,
@@ -271,6 +272,7 @@ function parseArgs(argv) {
     selected: null,
     marked: null,
     hidden: null,
+    filter: null,
     markSelected: false,
     pane: null,
     command: null,
@@ -412,6 +414,15 @@ function parseArgs(argv) {
       options.hidden = arg.slice("--hidden=".length);
       continue;
     }
+    if (arg === "--filter") {
+      options.filter = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--filter=")) {
+      options.filter = arg.slice("--filter=".length);
+      continue;
+    }
     if (arg === "--pane") {
       options.pane = readValue(argv, index, arg);
       index += 1;
@@ -537,6 +548,7 @@ Options
       --selected <username>      Select a row in snapshot or browser mode
       --marked <list>            Comma-separated compare set for browser mode
       --hidden <list>            Comma-separated usernames hidden from browser snapshots
+      --filter <term>            Filter browser rows by company, product, user, or Stripe text
       --pane <results|details|compare>
                                   Select the active browser pane
       --command <text>           Show a deterministic browser command/search prompt

@@ -261,6 +261,24 @@ test("browse can hide rows and show follow-on command prompts", () => {
   assert.match(command.stdout, /Segment analysis; lead scoring/);
 });
 
+test("browse snapshots can filter visible rows", () => {
+  const result = run([
+    "browse",
+    "analytics",
+    "--snapshot",
+    "--filter",
+    "refund",
+    "--columns",
+    "96",
+  ]);
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /1 visible of 18/);
+  assert.match(result.stdout, /filter "refund"/);
+  assert.match(result.stdout, /Ribbon Desk/);
+  assert.doesNotMatch(result.stdout, /Atlas Metrics/);
+});
+
 test("describe browse returns the keyboard contract", () => {
   const result = run(["describe", "browse"]);
 
@@ -268,6 +286,7 @@ test("describe browse returns the keyboard contract", () => {
   const payload = JSON.parse(result.stdout);
   assert.equal(payload.command, "flourisher browse <term>");
   assert.equal(payload.keys["j/k"], "Move selection down or up.");
+  assert.ok(payload.flags["--filter <term>"]);
   assert.equal(payload.keys.c, "Open compare mode when two or more rows are marked.");
 });
 

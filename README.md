@@ -83,6 +83,7 @@ For docs, tests, and screenshots, use deterministic snapshot mode:
 flourisher browse "analytics" --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane details --columns 132
 flourisher browse "analytics" --snapshot --selected vectorgrove --pane details --command "search products"
 flourisher browse "analytics" --snapshot --hidden atlasmetrics --selected northstar
+flourisher browse "analytics" --snapshot --filter subscription --columns 96
 ```
 
 ## Verification

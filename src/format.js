@@ -230,6 +230,7 @@ export function describeBrowseCommand() {
         "--selected <username>": "Select a row before rendering.",
         "--marked <list>": "Comma-separated usernames to mark for comparison.",
         "--hidden <list>": "Comma-separated usernames hidden from a deterministic browser snapshot.",
+        "--filter <term>": "Filter visible browser rows by company, product, user, or Stripe text.",
         "--pane <results|details|compare>": "Choose the active pane.",
         "--command <text>": "Show a deterministic command/search prompt in the browser frame.",
         "--columns <n>": "Pretend the terminal is n columns wide.",
