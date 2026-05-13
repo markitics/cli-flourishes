@@ -27,6 +27,8 @@ Without linking:
 
 ```sh
 node ./bin/flourisher.js search "analytics"
+node ./bin/flourisher.js profile atlasmetrics
+node ./bin/flourisher.js compare atlasmetrics vectorgrove summitschema
 ```
 
 ## What Search Shows
@@ -52,6 +54,8 @@ npm test
 npm run capture
 node ./bin/flourisher.js search "analytics" --no-links --columns 160
 node ./bin/flourisher.js search "analytics" --output json --limit 2
+node ./bin/flourisher.js profile atlasmetrics
+node ./bin/flourisher.js compare atlasmetrics vectorgrove
 ```
 
 Open `docs/index.html` in a browser for the explainer page and copy-paste demo

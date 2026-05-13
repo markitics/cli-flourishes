@@ -165,6 +165,141 @@ export function describeSearchCommand() {
   )}\n`;
 }
 
+export function describeProfileCommand() {
+  return `${JSON.stringify(
+    {
+      command: "flourisher profile <username>",
+      status: "demo",
+      behavior: "Shows a hard-coded detail panel for one demo company.",
+      flags: {
+        "--output <table|json|csv>": "Choose human table output or machine-readable output.",
+      },
+    },
+    null,
+    2,
+  )}\n`;
+}
+
+export function describeCompareCommand() {
+  return `${JSON.stringify(
+    {
+      command: "flourisher compare <username...>",
+      status: "demo",
+      behavior: "Shows a hard-coded comparison table for selected demo companies.",
+      flags: {
+        "--output <table|json|csv>": "Choose human table output or machine-readable output.",
+      },
+    },
+    null,
+    2,
+  )}\n`;
+}
+
+export function formatProfile(profile, options = {}) {
+  const rows = [
+    ["Business", `${profile.businessName} (${profile.website})`],
+    ["Profile", `@${profile.username} (${profile.profileUrl})`],
+    ["Stripe", profile.stripeIntegration],
+    ["Accepts link", yesNo(profile.acceptsLink)],
+    ["Projects", profile.projects ? profile.projectUrl : "no"],
+    ["Verified", profile.verified],
+    ["Products", profile.products],
+    ["Who uses them", profile.users],
+    ["Headquarters", profile.details.headquarters],
+    ["Founded", profile.details.founded],
+    ["Team size", profile.details.teamSize],
+    ["Pricing model", profile.details.pricingModel],
+    ["Response time", profile.details.responseTime],
+    ["Buying note", profile.details.buyingNote],
+    ["Risk", profile.details.risk],
+    ["Next action", profile.details.nextAction],
+  ];
+
+  return `${formatKeyValueTable(`Flourisher profile: @${profile.username}`, rows, options)}\n`;
+}
+
+export function formatProfileJson(profile) {
+  return `${JSON.stringify(profile, null, 2)}\n`;
+}
+
+export function formatProfileCsv(profile) {
+  const flat = flattenProfile(profile);
+  const fields = Object.keys(flat);
+  return `${fields.map(csvEscape).join(",")}\n${fields.map((field) => csvEscape(flat[field])).join(",")}\n`;
+}
+
+export function formatComparison(profiles, options = {}) {
+  const rows = profiles.map((profile) => {
+    return {
+      username: `@${profile.username}`,
+      stripeIntegration: profile.stripeIntegration,
+      acceptsLink: yesNo(profile.acceptsLink),
+      verified: profile.verified,
+      users: profile.users,
+      note: profile.details.buyingNote,
+    };
+  });
+  const columns = [
+    { key: "username", label: "Profile", width: { wide: 17, regular: 15, compact: 13 } },
+    { key: "stripeIntegration", label: "Stripe", width: { wide: 28, regular: 22, compact: 19 } },
+    { key: "acceptsLink", label: "Link", width: { wide: 6, regular: 6, compact: 5 } },
+    { key: "verified", label: "Verified", width: { wide: 10, regular: 9, compact: 8 } },
+    { key: "users", label: "Who uses them", width: { wide: 32, regular: 25, compact: 20 } },
+    { key: "note", label: "Buying note", width: { wide: 46, regular: 34, compact: 27 } },
+  ];
+  const mode = tableMode(options.columns, options.layout);
+  const color = options.color ?? false;
+  const border = makeBorder(columns, mode);
+  const lines = [
+    colorize("Flourisher compare", BOLD, color),
+    colorize("Hard-coded detail comparison. No backend calls yet.", DIM, color),
+    "",
+    border.top,
+    row(columns.map((field) => field.label), columns, mode, { color, header: true }),
+    border.sep,
+    ...rows.map((record) => {
+      return row(
+        columns.map((field) => {
+          const display = truncate(String(record[field.key] ?? ""), field.width[mode]);
+          return { rendered: display, display };
+        }),
+        columns,
+        mode,
+      );
+    }),
+    border.bottom,
+  ];
+
+  return `${lines.join("\n")}\n`;
+}
+
+export function formatComparisonJson(profiles) {
+  return `${JSON.stringify({ count: profiles.length, profiles }, null, 2)}\n`;
+}
+
+export function formatComparisonCsv(profiles) {
+  const fields = [
+    "businessName",
+    "username",
+    "stripeIntegration",
+    "acceptsLink",
+    "verified",
+    "products",
+    "users",
+    "buyingNote",
+    "nextAction",
+  ];
+  const lines = [
+    fields.map(csvEscape).join(","),
+    ...profiles.map((profile) => {
+      const flat = flattenProfile(profile);
+      return fields.map((field) => csvEscape(flat[field] ?? "")).join(",");
+    }),
+  ];
+
+  return `${lines.join("\n")}\n`;
+}
+
 function renderField(result, field, mode, options) {
   const width = field.width[mode];
   const raw = field.transform ? field.transform(result[field.key]) : result[field.key];
@@ -258,4 +393,60 @@ function csvEscape(value) {
   const normalized = String(value);
   if (!/[",\n]/.test(normalized)) return normalized;
   return `"${normalized.replaceAll("\"", "\"\"")}"`;
+}
+
+function formatKeyValueTable(title, rows, options = {}) {
+  const color = options.color ?? false;
+  const keyWidth = Math.max(...rows.map(([key]) => key.length), 12);
+  const valueWidth = options.layout === "compact" ? 58 : 86;
+  const columns = [
+    { label: "Field", width: { wide: keyWidth, regular: keyWidth, compact: keyWidth } },
+    { label: "Value", width: { wide: valueWidth, regular: valueWidth, compact: valueWidth } },
+  ];
+  const mode = "regular";
+  const border = makeBorder(columns, mode);
+  const lines = [
+    colorize(title, BOLD, color),
+    "",
+    border.top,
+    row(columns.map((field) => field.label), columns, mode, { color, header: true }),
+    border.sep,
+    ...rows.map(([key, value]) => {
+      return row(
+        [
+          { rendered: key, display: key },
+          { rendered: truncate(String(value), valueWidth), display: truncate(String(value), valueWidth) },
+        ],
+        columns,
+        mode,
+      );
+    }),
+    border.bottom,
+  ];
+
+  return lines.join("\n");
+}
+
+function flattenProfile(profile) {
+  return {
+    businessName: profile.businessName,
+    website: profile.website,
+    username: profile.username,
+    profileUrl: profile.profileUrl,
+    stripeIntegration: profile.stripeIntegration,
+    acceptsLink: profile.acceptsLink,
+    projects: profile.projects,
+    projectUrl: profile.projectUrl,
+    verified: profile.verified,
+    products: profile.products,
+    users: profile.users,
+    headquarters: profile.details.headquarters,
+    founded: profile.details.founded,
+    teamSize: profile.details.teamSize,
+    pricingModel: profile.details.pricingModel,
+    responseTime: profile.details.responseTime,
+    buyingNote: profile.details.buyingNote,
+    risk: profile.details.risk,
+    nextAction: profile.details.nextAction,
+  };
 }

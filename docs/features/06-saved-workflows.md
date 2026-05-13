@@ -8,12 +8,16 @@ or partnership decision without opening a browser for every row.
 ## Potential commands
 
 ```sh
-flourisher save atlasmetrics
+flourisher profile atlasmetrics
 flourisher compare atlasmetrics vectorgrove summitschema
+flourisher save atlasmetrics
 flourisher note atlasmetrics "Looks strongest for analytics engineers."
 flourisher open atlasmetrics
 flourisher copy atlasmetrics --field profileUrl
 ```
+
+`profile` and `compare` exist now with hard-coded data. The save, note, open,
+and copy commands are still proposed follow-ups.
 
 ## Interactive equivalents
 

@@ -65,6 +65,35 @@ test("describe search returns the machine-readable command contract", () => {
   assert.equal(payload.fields.businessName, "Displayed as a hyperlink to website in table mode.");
 });
 
+test("profile renders a hard-coded detail view", () => {
+  const result = run(["profile", "@atlasmetrics"]);
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /Flourisher profile: @atlasmetrics/);
+  assert.match(result.stdout, /Headquarters/);
+  assert.match(result.stdout, /Austin, TX/);
+  assert.match(result.stdout, /Buying note/);
+});
+
+test("compare renders selected demo profiles", () => {
+  const result = run(["compare", "atlasmetrics", "vectorgrove", "--columns", "160"]);
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /Flourisher compare/);
+  assert.match(result.stdout, /@atlasmetrics/);
+  assert.match(result.stdout, /@vectorgrove/);
+});
+
+test("profile and compare support json output", () => {
+  const profile = run(["profile", "atlasmetrics", "--json"]);
+  const compare = run(["compare", "atlasmetrics,vectorgrove", "--json"]);
+
+  assert.equal(profile.status, 0);
+  assert.equal(compare.status, 0);
+  assert.equal(JSON.parse(profile.stdout).details.headquarters, "Austin, TX");
+  assert.equal(JSON.parse(compare.stdout).count, 2);
+});
+
 test("invalid fields fail with valid field guidance", () => {
   const result = run(["search", "analytics", "--fields", "businessName,nope"]);
 

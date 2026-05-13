@@ -1,10 +1,19 @@
 import { DEMO_RESULTS, RESULT_FIELDS } from "./data.js";
 import {
+  describeCompareCommand,
+  describeProfileCommand,
   describeSearchCommand,
+  formatComparison,
+  formatComparisonCsv,
+  formatComparisonJson,
   formatCsv,
   formatJson,
+  formatProfile,
+  formatProfileCsv,
+  formatProfileJson,
   formatTable,
 } from "./format.js";
+import { findProfile, findProfiles } from "./profiles.js";
 
 const VERSION = "0.1.0";
 
@@ -27,6 +36,24 @@ export async function run(argv, io) {
   if (parsed.command === "describe" && parsed.positionals[0] === "search") {
     io.stdout.write(describeSearchCommand());
     return 0;
+  }
+
+  if (parsed.command === "describe" && parsed.positionals[0] === "profile") {
+    io.stdout.write(describeProfileCommand());
+    return 0;
+  }
+
+  if (parsed.command === "describe" && parsed.positionals[0] === "compare") {
+    io.stdout.write(describeCompareCommand());
+    return 0;
+  }
+
+  if (parsed.command === "profile") {
+    return renderProfile(parsed, io, { color, columns });
+  }
+
+  if (parsed.command === "compare") {
+    return renderCompare(parsed, io, { color, columns });
   }
 
   if (parsed.command !== "search") {
@@ -75,6 +102,70 @@ export async function run(argv, io) {
   }
 
   io.stdout.write(formatTable(results, renderOptions));
+  return 0;
+}
+
+function renderProfile(parsed, io, context) {
+  const username = parsed.positionals[0];
+  if (!username) {
+    io.stderr.write("Profile requires a username, for example: flourisher profile atlasmetrics\n");
+    return 1;
+  }
+
+  const profile = findProfile(username);
+  if (!profile) {
+    io.stderr.write(`No hard-coded demo profile found for ${username}\n`);
+    return 1;
+  }
+
+  if (parsed.options.output === "json") {
+    io.stdout.write(formatProfileJson(profile));
+    return 0;
+  }
+
+  if (parsed.options.output === "csv") {
+    io.stdout.write(formatProfileCsv(profile));
+    return 0;
+  }
+
+  io.stdout.write(formatProfile(profile, {
+    color: context.color,
+    columns: context.columns,
+    layout: parsed.options.layout,
+  }));
+  return 0;
+}
+
+function renderCompare(parsed, io, context) {
+  const requested = parsed.positionals.flatMap((value) => value.split(",")).filter(Boolean);
+  if (requested.length < 2) {
+    io.stderr.write("Compare requires at least two usernames, for example: flourisher compare atlasmetrics vectorgrove\n");
+    return 1;
+  }
+
+  const matches = findProfiles(requested);
+  const missing = matches.filter((match) => !match.result).map((match) => match.requested);
+  if (missing.length > 0) {
+    io.stderr.write(`No hard-coded demo profile found for: ${missing.join(", ")}\n`);
+    return 1;
+  }
+
+  const profiles = matches.map((match) => match.result);
+  if (parsed.options.output === "json") {
+    io.stdout.write(formatComparisonJson(profiles));
+    return 0;
+  }
+
+  if (parsed.options.output === "csv") {
+    io.stdout.write(formatComparisonCsv(profiles));
+    return 0;
+  }
+
+  io.stdout.write(formatComparison(profiles, {
+    color: context.color,
+    columns: context.columns,
+    layout: parsed.options.layout,
+  }));
   return 0;
 }
 
@@ -225,7 +316,9 @@ function helpText() {
 
 Usage
   flourisher search <term> [options]
-  flourisher describe search
+  flourisher profile <username> [options]
+  flourisher compare <username...> [options]
+  flourisher describe <search|profile|compare>
 
 Search behavior
   This demo ignores the term and returns the same hard-coded result set.
@@ -250,5 +343,7 @@ Examples
   flourisher search "analytics" --wide
   flourisher search "analytics" --output json --fields businessName,username,acceptsLink
   flourisher search "anything" --csv --limit 5
+  flourisher profile atlasmetrics
+  flourisher compare atlasmetrics vectorgrove summitschema
 `;
 }
