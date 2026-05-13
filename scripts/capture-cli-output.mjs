@@ -99,7 +99,7 @@ async function captureTerminal(name, args) {
   const text = lines
     .map((line, index) => {
       const y = padding + 14 + index * lineHeight;
-      return `<text x="${padding}" y="${y}">${escapeXml(line)}</text>`;
+      return renderSvgTextLine(line, padding, y);
     })
     .join("\n  ");
 
@@ -138,4 +138,34 @@ function escapeXml(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll("\"", "&quot;");
+}
+
+function renderSvgTextLine(line, x, y) {
+  const pieces = [];
+  const tagPattern = /\[[^\]]+\]/g;
+  let cursor = 0;
+  for (const match of line.matchAll(tagPattern)) {
+    if (match.index > cursor) {
+      pieces.push(`<tspan>${escapeXml(line.slice(cursor, match.index))}</tspan>`);
+    }
+    const tag = match[0];
+    pieces.push(`<tspan fill="${tagFill(tag)}" font-weight="700">${escapeXml(tag)}</tspan>`);
+    cursor = match.index + tag.length;
+  }
+  if (cursor < line.length) {
+    pieces.push(`<tspan>${escapeXml(line.slice(cursor))}</tspan>`);
+  }
+
+  return `<text x="${x}" y="${y}">${pieces.join("")}</text>`;
+}
+
+function tagFill(tag) {
+  const normalized = tag.toLowerCase();
+  if (normalized.includes("unverified")) return "#ff7b91";
+  if (normalized.includes("pending") || normalized.includes("pilot") || normalized.includes("community")) return "#f2cc60";
+  if (normalized.includes("soc2") || normalized.includes("gold")) return "#63d297";
+  if (normalized.includes("subscription") || normalized.includes("payment") || normalized.includes("marketplace")) return "#d9a3ff";
+  if (normalized.includes("listed") || normalized.includes("deep") || normalized.includes("partner")) return "#8cc8ff";
+  if (normalized.includes("silver")) return "#8cc8ff";
+  return "#d7e0e8";
 }

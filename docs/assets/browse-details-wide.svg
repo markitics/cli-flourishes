@@ -5,39 +5,39 @@
   <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
   <circle cx="60" cy="22" r="5" fill="#54c571"/>
   <g transform="translate(0 22)" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d7e0e8">
-  <text x="24" y="38">------------------------------------------------------------------------------------------------------------------------------------</text>
-  <text x="24" y="56">Flourisher interactive browse: &quot;analytics&quot;</text>
-  <text x="24" y="74">18 visible of 18 hard-coded results | 2 marked | 0 hidden</text>
-  <text x="24" y="92"> Results   [Details]   Compare </text>
-  <text x="24" y="110">&gt; / search products | ask question | compare selected | remove from view</text>
-  <text x="24" y="128">------------------------------------------------------------------------------------------------------------------------------------</text>
-  <text x="24" y="146">   Business          Profile            Tags                           Stripe     | Detail panel                                    </text>
-  <text x="24" y="164">--- ----------------- ------------------ ------------------------------ ------... | ------------                                    </text>
-  <text x="24" y="182">   Launchlane        @launchlane        [Community] [one-time payme... Payment... | Vector Grove (@vectorgrove)                     </text>
-  <text x="24" y="200">   Copper Canary     @coppercanary      [Silver] [workflow] [SOC2 p... Radar c... | Tags: [Silver] [subscription] [SOC2 pending] ...</text>
-  <text x="24" y="218">   Ribbon Desk       @ribbondesk        [Pilot] [subscription] [cus... Support... | Website: https://example.com/vector-grove       </text>
-  <text x="24" y="236">   Summit Schema     @summitschema      [Gold] [workflow] [SOC2]       Data pi... | Profile: https://flourisher.net/vectorgrove     </text>
-  <text x="24" y="254">   Fieldnote Pay     @fieldnotepay      [Silver] [workflow] [SOC2 p... Termina... | Stripe: Marketplace app: analytics              </text>
-  <text x="24" y="272">   Beacon Basket     @beaconbasket      [Community] [subscription] ... Checkou... | Payment: subscription                           </text>
-  <text x="24" y="290">   Quota Studio      @quotastudio       [Gold] [subscription] [SOC2]   Subscri... | Compliance: SOC2 pending                        </text>
-  <text x="24" y="308">   Fairwater Labs    @fairwater         [Pilot] [workflow] [custome... Custom ... | Integration: listed app                         </text>
-  <text x="24" y="326">&gt;* Vector Grove      @vectorgrove       [Silver] [subscription] [SO... Marketp... | Products: Segment analysis; lead scoring        </text>
-  <text x="24" y="344">                                                                                  | Users: Sales teams; growth analysts             </text>
-  <text x="24" y="362">                                                                                  | HQ: Madison, WI                                 </text>
-  <text x="24" y="380">                                                                                  | Pricing: Monthly tiers                          </text>
-  <text x="24" y="398">                                                                                  | Response: Same day                              </text>
-  <text x="24" y="416">                                                                                  | Risk: Low demo risk.                            </text>
-  <text x="24" y="434">                                                                                  | Note: Good compare row for growth analytics.    </text>
-  <text x="24" y="452">                                                                                  |                                                 </text>
-  <text x="24" y="470">                                                                                  | Actions                                         </text>
-  <text x="24" y="488">                                                                                  | s search products                               </text>
-  <text x="24" y="506">                                                                                  | a ask a question                                </text>
-  <text x="24" y="524">                                                                                  | x remove from view                              </text>
-  <text x="24" y="542">                                                                                  | c compare selected                              </text>
-  <text x="24" y="560">                                                                                  |                                                 </text>
-  <text x="24" y="578">                                                                                  |                                                 </text>
-  <text x="24" y="596">------------------------------------------------------------------------------------------------------------------------------------</text>
-  <text x="24" y="614">j/k move | enter details | space mark | c compare selected | s search products | a ask | x remove | tab/l next pane | h previous ...</text>
-  <text x="24" y="632">------------------------------------------------------------------------------------------------------------------------------------</text>
+  <text x="24" y="38"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
+  <text x="24" y="56"><tspan>Flourisher interactive browse: &quot;analytics&quot;</tspan></text>
+  <text x="24" y="74"><tspan>18 visible of 18 hard-coded results | 2 marked | 0 hidden</tspan></text>
+  <text x="24" y="92"><tspan> Results   </tspan><tspan fill="#d7e0e8" font-weight="700">[Details]</tspan><tspan>   Compare </tspan></text>
+  <text x="24" y="110"><tspan>&gt; / search products | ask question | compare selected | remove from view</tspan></text>
+  <text x="24" y="128"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
+  <text x="24" y="146"><tspan>   Business          Profile            Tags                           Stripe     | Detail panel                                    </tspan></text>
+  <text x="24" y="164"><tspan>--- ----------------- ------------------ ------------------------------ ------... | ------------                                    </tspan></text>
+  <text x="24" y="182"><tspan>   Launchlane        @launchlane        </tspan><tspan fill="#f2cc60" font-weight="700">[Community]</tspan><tspan> [one-time payme... Payment... | Vector Grove (@vectorgrove)                     </tspan></text>
+  <text x="24" y="200"><tspan>   Copper Canary     @coppercanary      </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2 p... Radar c... | Tags: [Silver]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> </tspan><tspan fill="#f2cc60" font-weight="700">[SOC2 pending]</tspan><tspan> ...</tspan></text>
+  <text x="24" y="218"><tspan>   Ribbon Desk       @ribbondesk        </tspan><tspan fill="#f2cc60" font-weight="700">[Pilot]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> [cus... Support... | Website: https://example.com/vector-grove       </tspan></text>
+  <text x="24" y="236"><tspan>   Summit Schema     @summitschema      </tspan><tspan fill="#63d297" font-weight="700">[Gold]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2]</tspan><tspan>       Data pi... | Profile: https://flourisher.net/vectorgrove     </tspan></text>
+  <text x="24" y="254"><tspan>   Fieldnote Pay     @fieldnotepay      </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> [SOC2 p... Termina... | Stripe: Marketplace app: analytics              </tspan></text>
+  <text x="24" y="272"><tspan>   Beacon Basket     @beaconbasket      </tspan><tspan fill="#f2cc60" font-weight="700">[Community]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> ... Checkou... | Payment: subscription                           </tspan></text>
+  <text x="24" y="290"><tspan>   Quota Studio      @quotastudio       </tspan><tspan fill="#63d297" font-weight="700">[Gold]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2]</tspan><tspan>   Subscri... | Compliance: SOC2 pending                        </tspan></text>
+  <text x="24" y="308"><tspan>   Fairwater Labs    @fairwater         </tspan><tspan fill="#f2cc60" font-weight="700">[Pilot]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> [custome... Custom ... | Integration: listed app                         </tspan></text>
+  <text x="24" y="326"><tspan>&gt;* Vector Grove      @vectorgrove       </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> [SO... Marketp... | Products: Segment analysis; lead scoring        </tspan></text>
+  <text x="24" y="344"><tspan>                                                                                  | Users: Sales teams; growth analysts             </tspan></text>
+  <text x="24" y="362"><tspan>                                                                                  | HQ: Madison, WI                                 </tspan></text>
+  <text x="24" y="380"><tspan>                                                                                  | Pricing: Monthly tiers                          </tspan></text>
+  <text x="24" y="398"><tspan>                                                                                  | Response: Same day                              </tspan></text>
+  <text x="24" y="416"><tspan>                                                                                  | Risk: Low demo risk.                            </tspan></text>
+  <text x="24" y="434"><tspan>                                                                                  | Note: Good compare row for growth analytics.    </tspan></text>
+  <text x="24" y="452"><tspan>                                                                                  |                                                 </tspan></text>
+  <text x="24" y="470"><tspan>                                                                                  | Actions                                         </tspan></text>
+  <text x="24" y="488"><tspan>                                                                                  | s search products                               </tspan></text>
+  <text x="24" y="506"><tspan>                                                                                  | a ask a question                                </tspan></text>
+  <text x="24" y="524"><tspan>                                                                                  | x remove from view                              </tspan></text>
+  <text x="24" y="542"><tspan>                                                                                  | c compare selected                              </tspan></text>
+  <text x="24" y="560"><tspan>                                                                                  |                                                 </tspan></text>
+  <text x="24" y="578"><tspan>                                                                                  |                                                 </tspan></text>
+  <text x="24" y="596"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
+  <text x="24" y="614"><tspan>j/k move | enter details | space mark | c compare selected | s search products | a ask | x remove | tab/l next pane | h previous ...</tspan></text>
+  <text x="24" y="632"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
   </g>
 </svg>

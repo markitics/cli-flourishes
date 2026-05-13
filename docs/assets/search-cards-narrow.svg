@@ -5,52 +5,52 @@
   <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
   <circle cx="60" cy="22" r="5" fill="#54c571"/>
   <g transform="translate(0 22)" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d7e0e8">
-  <text x="24" y="38">Flourisher search: &quot;analytics&quot;</text>
-  <text x="24" y="56">Backend: stubbed demo data. Showing 4 hard-coded results for</text>
-  <text x="24" y="74">every query.</text>
+  <text x="24" y="38"><tspan>Flourisher search: &quot;analytics&quot;</tspan></text>
+  <text x="24" y="56"><tspan>Backend: stubbed demo data. Showing 4 hard-coded results for</tspan></text>
+  <text x="24" y="74"><tspan>every query.</tspan></text>
   <text x="24" y="92"></text>
-  <text x="24" y="110">1. Atlas Metrics - @atlasmetrics</text>
-  <text x="24" y="128">   Website: https://example.com/atlas-metrics</text>
-  <text x="24" y="146">   Profile: https://flourisher.net/atlasmetrics</text>
-  <text x="24" y="164">   Stripe: Marketplace app: analytics</text>
-  <text x="24" y="182">   Status: Link: yes | Projects: yes | Verified: Gold</text>
-  <text x="24" y="200">   Tags: [Gold] [marketplace payouts] [SOC2] [listed app]</text>
-  <text x="24" y="218">   Project: https://flourisher.net/projects/atlasmetrics</text>
-  <text x="24" y="236">   Products: Cohort dashboards; KPI alerts</text>
-  <text x="24" y="254">   Users: Growth teams; SaaS founders</text>
+  <text x="24" y="110"><tspan>1. Atlas Metrics - @atlasmetrics</tspan></text>
+  <text x="24" y="128"><tspan>   Website: https://example.com/atlas-metrics</tspan></text>
+  <text x="24" y="146"><tspan>   Profile: https://flourisher.net/atlasmetrics</tspan></text>
+  <text x="24" y="164"><tspan>   Stripe: Marketplace app: analytics</tspan></text>
+  <text x="24" y="182"><tspan>   Status: Link: yes | Projects: yes | Verified: Gold</tspan></text>
+  <text x="24" y="200"><tspan>   Tags: </tspan><tspan fill="#63d297" font-weight="700">[Gold]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[marketplace payouts]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2]</tspan><tspan> </tspan><tspan fill="#8cc8ff" font-weight="700">[listed app]</tspan></text>
+  <text x="24" y="218"><tspan>   Project: https://flourisher.net/projects/atlasmetrics</tspan></text>
+  <text x="24" y="236"><tspan>   Products: Cohort dashboards; KPI alerts</tspan></text>
+  <text x="24" y="254"><tspan>   Users: Growth teams; SaaS founders</tspan></text>
   <text x="24" y="272"></text>
-  <text x="24" y="290">2. Northstar Loop - @northstar</text>
-  <text x="24" y="308">   Website: https://example.com/northstar-loop</text>
-  <text x="24" y="326">   Profile: https://flourisher.net/northstar</text>
-  <text x="24" y="344">   Stripe: Embedded Connect partner</text>
-  <text x="24" y="362">   Status: Link: yes | Projects: yes | Verified: Silver</text>
-  <text x="24" y="380">   Tags: [Silver] [marketplace payouts] [SOC2 pending] [deep</text>
-  <text x="24" y="398">         integration]</text>
-  <text x="24" y="416">   Project: https://flourisher.net/projects/northstar</text>
-  <text x="24" y="434">   Products: Creator payouts; usage billing</text>
-  <text x="24" y="452">   Users: Marketplaces; agencies</text>
+  <text x="24" y="290"><tspan>2. Northstar Loop - @northstar</tspan></text>
+  <text x="24" y="308"><tspan>   Website: https://example.com/northstar-loop</tspan></text>
+  <text x="24" y="326"><tspan>   Profile: https://flourisher.net/northstar</tspan></text>
+  <text x="24" y="344"><tspan>   Stripe: Embedded Connect partner</tspan></text>
+  <text x="24" y="362"><tspan>   Status: Link: yes | Projects: yes | Verified: Silver</tspan></text>
+  <text x="24" y="380"><tspan>   Tags: </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[marketplace payouts]</tspan><tspan> </tspan><tspan fill="#f2cc60" font-weight="700">[SOC2 pending]</tspan><tspan> [deep</tspan></text>
+  <text x="24" y="398"><tspan>         integration]</tspan></text>
+  <text x="24" y="416"><tspan>   Project: https://flourisher.net/projects/northstar</tspan></text>
+  <text x="24" y="434"><tspan>   Products: Creator payouts; usage billing</tspan></text>
+  <text x="24" y="452"><tspan>   Users: Marketplaces; agencies</tspan></text>
   <text x="24" y="470"></text>
-  <text x="24" y="488">3. Ledgerfield - @ledgerfield</text>
-  <text x="24" y="506">   Website: https://example.com/ledgerfield</text>
-  <text x="24" y="524">   Profile: https://flourisher.net/ledgerfield</text>
-  <text x="24" y="542">   Stripe: Verified extension</text>
-  <text x="24" y="560">   Status: Link: no | Projects: no | Verified: Gold</text>
-  <text x="24" y="578">   Tags: [Gold] [workflow] [SOC2] [listed app]</text>
-  <text x="24" y="596">   Products: Revenue recognition; exports</text>
-  <text x="24" y="614">   Users: Finance operators; controllers</text>
+  <text x="24" y="488"><tspan>3. Ledgerfield - @ledgerfield</tspan></text>
+  <text x="24" y="506"><tspan>   Website: https://example.com/ledgerfield</tspan></text>
+  <text x="24" y="524"><tspan>   Profile: https://flourisher.net/ledgerfield</tspan></text>
+  <text x="24" y="542"><tspan>   Stripe: Verified extension</tspan></text>
+  <text x="24" y="560"><tspan>   Status: Link: no | Projects: no | Verified: Gold</tspan></text>
+  <text x="24" y="578"><tspan>   Tags: </tspan><tspan fill="#63d297" font-weight="700">[Gold]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2]</tspan><tspan> </tspan><tspan fill="#8cc8ff" font-weight="700">[listed app]</tspan></text>
+  <text x="24" y="596"><tspan>   Products: Revenue recognition; exports</tspan></text>
+  <text x="24" y="614"><tspan>   Users: Finance operators; controllers</tspan></text>
   <text x="24" y="632"></text>
-  <text x="24" y="650">4. BrightCart - @brightcart</text>
-  <text x="24" y="668">   Website: https://example.com/brightcart</text>
-  <text x="24" y="686">   Profile: https://flourisher.net/brightcart</text>
-  <text x="24" y="704">   Stripe: Checkout plugin</text>
-  <text x="24" y="722">   Status: Link: yes | Projects: yes | Verified: Community</text>
-  <text x="24" y="740">   Tags: [Community] [one-time payment] [public docs] [light</text>
-  <text x="24" y="758">         integration]</text>
-  <text x="24" y="776">   Project: https://flourisher.net/projects/brightcart</text>
-  <text x="24" y="794">   Products: Digital storefronts; bundles</text>
-  <text x="24" y="812">   Users: Solo sellers; newsletter shops</text>
+  <text x="24" y="650"><tspan>4. BrightCart - @brightcart</tspan></text>
+  <text x="24" y="668"><tspan>   Website: https://example.com/brightcart</tspan></text>
+  <text x="24" y="686"><tspan>   Profile: https://flourisher.net/brightcart</tspan></text>
+  <text x="24" y="704"><tspan>   Stripe: Checkout plugin</tspan></text>
+  <text x="24" y="722"><tspan>   Status: Link: yes | Projects: yes | Verified: Community</tspan></text>
+  <text x="24" y="740"><tspan>   Tags: </tspan><tspan fill="#f2cc60" font-weight="700">[Community]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[one-time payment]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[public docs]</tspan><tspan> [light</tspan></text>
+  <text x="24" y="758"><tspan>         integration]</tspan></text>
+  <text x="24" y="776"><tspan>   Project: https://flourisher.net/projects/brightcart</tspan></text>
+  <text x="24" y="794"><tspan>   Products: Digital storefronts; bundles</tspan></text>
+  <text x="24" y="812"><tspan>   Users: Solo sellers; newsletter shops</tspan></text>
   <text x="24" y="830"></text>
-  <text x="24" y="848">Try: flourisher search analytics --output json --fields</text>
-  <text x="24" y="866">businessName,username,acceptsLink</text>
+  <text x="24" y="848"><tspan>Try: flourisher search analytics --output json --fields</tspan></text>
+  <text x="24" y="866"><tspan>businessName,username,acceptsLink</tspan></text>
   </g>
 </svg>

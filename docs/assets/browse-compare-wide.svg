@@ -5,27 +5,27 @@
   <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
   <circle cx="60" cy="22" r="5" fill="#54c571"/>
   <g transform="translate(0 22)" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d7e0e8">
-  <text x="24" y="38">------------------------------------------------------------------------------------------------------------------------------------</text>
-  <text x="24" y="56">Flourisher interactive browse: &quot;analytics&quot;</text>
-  <text x="24" y="74">18 visible of 18 hard-coded results | 2 marked | 0 hidden</text>
-  <text x="24" y="92"> Results    Details   [Compare]</text>
-  <text x="24" y="110">&gt; / search products | ask question | compare selected | remove from view</text>
-  <text x="24" y="128">------------------------------------------------------------------------------------------------------------------------------------</text>
-  <text x="24" y="146">   Business          Profile            Tags                           Stripe     | Detail panel                                    </text>
-  <text x="24" y="164">--- ----------------- ------------------ ------------------------------ ------... | ------------                                    </text>
-  <text x="24" y="182">   Launchlane        @launchlane        [Community] [one-time payme... Payment... | Compare selected                                </text>
-  <text x="24" y="200">   Copper Canary     @coppercanary      [Silver] [workflow] [SOC2 p... Radar c... | * @atlasmetrics: marketplace payouts, SOC2, U...</text>
-  <text x="24" y="218">   Ribbon Desk       @ribbondesk        [Pilot] [subscription] [cus... Support... | * @vectorgrove: subscription, SOC2 pending, M...</text>
-  <text x="24" y="236">   Summit Schema     @summitschema      [Gold] [workflow] [SOC2]       Data pi... |                                                 </text>
-  <text x="24" y="254">   Fieldnote Pay     @fieldnotepay      [Silver] [workflow] [SOC2 p... Termina... | Actions                                         </text>
-  <text x="24" y="272">   Beacon Basket     @beaconbasket      [Community] [subscription] ... Checkou... | s search products                               </text>
-  <text x="24" y="290">   Quota Studio      @quotastudio       [Gold] [subscription] [SOC2]   Subscri... | a ask a question                                </text>
-  <text x="24" y="308">   Fairwater Labs    @fairwater         [Pilot] [workflow] [custome... Custom ... | x remove from view                              </text>
-  <text x="24" y="326">&gt;* Vector Grove      @vectorgrove       [Silver] [subscription] [SO... Marketp... | c compare selected                              </text>
-  <text x="24" y="344">                                                                                  |                                                 </text>
-  <text x="24" y="362">                                                                                  |                                                 </text>
-  <text x="24" y="380">------------------------------------------------------------------------------------------------------------------------------------</text>
-  <text x="24" y="398">j/k move | enter details | space mark | c compare selected | s search products | a ask | x remove | tab/l next pane | h previous ...</text>
-  <text x="24" y="416">------------------------------------------------------------------------------------------------------------------------------------</text>
+  <text x="24" y="38"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
+  <text x="24" y="56"><tspan>Flourisher interactive browse: &quot;analytics&quot;</tspan></text>
+  <text x="24" y="74"><tspan>18 visible of 18 hard-coded results | 2 marked | 0 hidden</tspan></text>
+  <text x="24" y="92"><tspan> Results    Details   </tspan><tspan fill="#d7e0e8" font-weight="700">[Compare]</tspan></text>
+  <text x="24" y="110"><tspan>&gt; / search products | ask question | compare selected | remove from view</tspan></text>
+  <text x="24" y="128"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
+  <text x="24" y="146"><tspan>   Business          Profile            Tags                           Stripe     | Detail panel                                    </tspan></text>
+  <text x="24" y="164"><tspan>--- ----------------- ------------------ ------------------------------ ------... | ------------                                    </tspan></text>
+  <text x="24" y="182"><tspan>   Launchlane        @launchlane        </tspan><tspan fill="#f2cc60" font-weight="700">[Community]</tspan><tspan> [one-time payme... Payment... | Compare selected                                </tspan></text>
+  <text x="24" y="200"><tspan>   Copper Canary     @coppercanary      </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> [SOC2 p... Radar c... | * @atlasmetrics: marketplace payouts, SOC2, U...</tspan></text>
+  <text x="24" y="218"><tspan>   Ribbon Desk       @ribbondesk        </tspan><tspan fill="#f2cc60" font-weight="700">[Pilot]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> [cus... Support... | * @vectorgrove: subscription, SOC2 pending, M...</tspan></text>
+  <text x="24" y="236"><tspan>   Summit Schema     @summitschema      </tspan><tspan fill="#63d297" font-weight="700">[Gold]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2]</tspan><tspan>       Data pi... |                                                 </tspan></text>
+  <text x="24" y="254"><tspan>   Fieldnote Pay     @fieldnotepay      </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> [SOC2 p... Termina... | Actions                                         </tspan></text>
+  <text x="24" y="272"><tspan>   Beacon Basket     @beaconbasket      </tspan><tspan fill="#f2cc60" font-weight="700">[Community]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> ... Checkou... | s search products                               </tspan></text>
+  <text x="24" y="290"><tspan>   Quota Studio      @quotastudio       </tspan><tspan fill="#63d297" font-weight="700">[Gold]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> </tspan><tspan fill="#63d297" font-weight="700">[SOC2]</tspan><tspan>   Subscri... | a ask a question                                </tspan></text>
+  <text x="24" y="308"><tspan>   Fairwater Labs    @fairwater         </tspan><tspan fill="#f2cc60" font-weight="700">[Pilot]</tspan><tspan> </tspan><tspan fill="#d7e0e8" font-weight="700">[workflow]</tspan><tspan> [custome... Custom ... | x remove from view                              </tspan></text>
+  <text x="24" y="326"><tspan>&gt;* Vector Grove      @vectorgrove       </tspan><tspan fill="#8cc8ff" font-weight="700">[Silver]</tspan><tspan> </tspan><tspan fill="#d9a3ff" font-weight="700">[subscription]</tspan><tspan> [SO... Marketp... | c compare selected                              </tspan></text>
+  <text x="24" y="344"><tspan>                                                                                  |                                                 </tspan></text>
+  <text x="24" y="362"><tspan>                                                                                  |                                                 </tspan></text>
+  <text x="24" y="380"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
+  <text x="24" y="398"><tspan>j/k move | enter details | space mark | c compare selected | s search products | a ask | x remove | tab/l next pane | h previous ...</tspan></text>
+  <text x="24" y="416"><tspan>------------------------------------------------------------------------------------------------------------------------------------</tspan></text>
   </g>
 </svg>
