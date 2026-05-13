@@ -16,6 +16,8 @@ principle is: every expensive or ambiguous byte should be optional.
   before causing side effects.
 - Explicit non-interactive equivalents: every TUI action should map to a flag or
   subcommand, such as `--hidden`, `compare`, `profile`, or future `notes add`.
+- Skill files: a repo-tracked `SKILL.md` can teach agents workflow rules that do
+  not belong in terse `--help` output.
 
 ## Open Questions for Flourisher
 
@@ -24,6 +26,8 @@ principle is: every expensive or ambiguous byte should be optional.
   can reproduce the same state?
 - Should future backend errors include a structured `recoverable` field and
   recommended next command?
+- Should each backend surface get its own skill file, or should Flourisher keep
+  one higher-level buying-research skill?
 
 ## Sources
 
@@ -33,4 +37,3 @@ principle is: every expensive or ambiguous byte should be optional.
   <https://cli.github.com/manual/gh_help_formatting>
 - Terraform JSON output docs:
   <https://developer.hashicorp.com/terraform/internals/json-format>
-
