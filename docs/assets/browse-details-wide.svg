@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1131" height="462" viewBox="0 0 1131 462">
+  <rect width="100%" height="100%" rx="12" fill="#101418"/>
+  <rect x="1" y="1" width="1129" height="460" rx="11" fill="none" stroke="#2c3540"/>
+  <circle cx="26" cy="22" r="5" fill="#e05d44"/>
+  <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
+  <circle cx="60" cy="22" r="5" fill="#54c571"/>
+  <g transform="translate(0 22)" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d7e0e8">
+  <text x="24" y="38">------------------------------------------------------------------------------------------------------------------------------------</text>
+  <text x="24" y="56">Flourisher interactive browse: &quot;analytics&quot;</text>
+  <text x="24" y="74">18 hard-coded results | 2 marked for compare</text>
+  <text x="24" y="92"> Results   [Details]   Compare </text>
+  <text x="24" y="110">------------------------------------------------------------------------------------------------------------------------------------</text>
+  <text x="24" y="128">   Business          Profile            Stripe                       Trust        | Detail panel                                    </text>
+  <text x="24" y="146">--- ----------------- ------------------ --------------------------- ---------... | ------------                                    </text>
+  <text x="24" y="164">   Launchlane        @launchlane        Payment Links specialist    yes Community | Vector Grove (@vectorgrove)                     </text>
+  <text x="24" y="182">   Copper Canary     @coppercanary      Radar companion             no Silver     | Website: https://example.com/vector-grove       </text>
+  <text x="24" y="200">   Ribbon Desk       @ribbondesk        Support app integration     yes Pilot     | Profile: https://flourisher.net/vectorgrove     </text>
+  <text x="24" y="218">   Summit Schema     @summitschema      Data pipeline partner       yes Gold      | Stripe: Marketplace app: analytics              </text>
+  <text x="24" y="236">   Fieldnote Pay     @fieldnotepay      Terminal services partner   no Silver     | Products: Segment analysis; lead scoring        </text>
+  <text x="24" y="254">   Beacon Basket     @beaconbasket      Checkout plugin             yes Community | Users: Sales teams; growth analysts             </text>
+  <text x="24" y="272">   Quota Studio      @quotastudio       Subscription toolkit        yes Gold      | HQ: Madison, WI                                 </text>
+  <text x="24" y="290">   Fairwater Labs    @fairwater         Custom integration          no Pilot      | Pricing: Monthly tiers                          </text>
+  <text x="24" y="308">&gt;* Vector Grove      @vectorgrove       Marketplace app: analytics  yes Silver    | Response: Same day                              </text>
+  <text x="24" y="326">                                                                                  | Risk: Low demo risk.                            </text>
+  <text x="24" y="344">                                                                                  | Note: Good compare row for growth analytics.    </text>
+  <text x="24" y="362">                                                                                  |                                                 </text>
+  <text x="24" y="380">                                                                                  |                                                 </text>
+  <text x="24" y="398">------------------------------------------------------------------------------------------------------------------------------------</text>
+  <text x="24" y="416">j/k move | enter details | space mark | tab/l next pane | h previous | esc back | q quit</text>
+  <text x="24" y="434">------------------------------------------------------------------------------------------------------------------------------------</text>
+  </g>
+</svg>

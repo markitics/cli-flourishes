@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------------------------------------------------------------
+Flourisher interactive browse: "analytics"
+18 hard-coded results | 2 marked for compare
+ Results   [Details]   Compare 
+------------------------------------------------------------------------------------------------------------------------------------
+   Business          Profile            Stripe                       Trust        | Detail panel                                    
+--- ----------------- ------------------ --------------------------- ---------... | ------------                                    
+   Launchlane        @launchlane        Payment Links specialist    yes Community | Vector Grove (@vectorgrove)                     
+   Copper Canary     @coppercanary      Radar companion             no Silver     | Website: https://example.com/vector-grove       
+   Ribbon Desk       @ribbondesk        Support app integration     yes Pilot     | Profile: https://flourisher.net/vectorgrove     
+   Summit Schema     @summitschema      Data pipeline partner       yes Gold      | Stripe: Marketplace app: analytics              
+   Fieldnote Pay     @fieldnotepay      Terminal services partner   no Silver     | Products: Segment analysis; lead scoring        
+   Beacon Basket     @beaconbasket      Checkout plugin             yes Community | Users: Sales teams; growth analysts             
+   Quota Studio      @quotastudio       Subscription toolkit        yes Gold      | HQ: Madison, WI                                 
+   Fairwater Labs    @fairwater         Custom integration          no Pilot      | Pricing: Monthly tiers                          
+>* Vector Grove      @vectorgrove       Marketplace app: analytics  yes Silver    | Response: Same day                              
+                                                                                  | Risk: Low demo risk.                            
+                                                                                  | Note: Good compare row for growth analytics.    
+                                                                                  |                                                 
+                                                                                  |                                                 
+------------------------------------------------------------------------------------------------------------------------------------
+j/k move | enter details | space mark | tab/l next pane | h previous | esc back | q quit
+------------------------------------------------------------------------------------------------------------------------------------

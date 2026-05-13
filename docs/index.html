@@ -100,7 +100,28 @@
             </div>
             <pre><code>node ./bin/flourisher.js compare atlasmetrics vectorgrove summitschema</code></pre>
           </div>
+          <div class="snippet">
+            <div class="snippet-head">
+              <h3>Browse snapshot</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js browse &quot;analytics&quot; --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane details --columns 132">Copy</button>
+            </div>
+            <pre><code>node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane details --columns 132</code></pre>
+          </div>
         </div>
+      </section>
+
+      <section class="wrap section">
+        <div class="section-heading">
+          <p class="eyebrow">Interactive mode</p>
+          <h2>Keyboard browsing without a backend</h2>
+        </div>
+        <figure class="wide-artifact">
+          <img src="./assets/browse-details-wide.png" alt="Terminal screenshot of the interactive browse details pane">
+          <figcaption>
+            The same hard-coded data can be explored with row selection,
+            detail panes, and a marked compare set.
+          </figcaption>
+        </figure>
       </section>
 
       <section id="decisions" class="band">
@@ -137,6 +158,14 @@
                 <code>--wide</code>, <code>--compact</code>, and
                 <code>--columns</code> let demos and screenshots show how result
                 density changes by terminal width.
+              </p>
+            </article>
+            <article>
+              <h3>Interactive browser</h3>
+              <p>
+                <code>browse</code> adds keyboard row navigation, details, and a
+                compare pane while preserving deterministic
+                <code>--snapshot</code> output for tests and screenshots.
               </p>
             </article>
           </div>

@@ -5,6 +5,7 @@ import { run } from "../src/cli.js";
 run(process.argv.slice(2), {
   stdout: process.stdout,
   stderr: process.stderr,
+  stdin: process.stdin,
   env: process.env,
   columns: process.stdout.columns,
 }).then(
