@@ -121,7 +121,8 @@ export async function runBrowseSession(results, options, io) {
 
 function normalizeState(results, options) {
   const hidden = new Set(parseList(options.hidden));
-  const visibleResults = results.filter((result) => !hidden.has(result.username));
+  const filter = String(options.filter ?? "").trim();
+  const visibleResults = filterResults(results, hidden, filter);
   const selectedIndex = selectedIndexFor(visibleResults, options.selected);
   const marked = new Set(parseList(options.marked));
   if (options.markSelected) {
@@ -136,6 +137,7 @@ function normalizeState(results, options) {
     selectedIndex,
     marked,
     hidden,
+    filter,
     pane: PANES.includes(options.pane) ? options.pane : "results",
     command: options.command ?? "",
     color: options.color ?? false,
@@ -151,7 +153,8 @@ function renderFrame(state) {
   const command = renderCommandStrip(state);
   const body = width < 108 ? renderStacked(state) : renderSplit(state, width);
   const controls = controlsLine(state);
-  const count = `${state.results.length} visible of ${state.allResults.length} hard-coded results | ${state.marked.size} marked | ${state.hidden.size} hidden`;
+  const filterStatus = state.filter ? ` | filter "${state.filter}"` : "";
+  const count = `${state.results.length} visible of ${state.allResults.length} hard-coded results | ${state.marked.size} marked | ${state.hidden.size} hidden${filterStatus}`;
 
   return [
     line(width),
@@ -303,6 +306,24 @@ function parseList(value) {
     .filter(Boolean);
 }
 
+function filterResults(results, hidden, filter) {
+  const normalized = filter.toLowerCase();
+  return results.filter((result) => {
+    if (hidden.has(result.username)) return false;
+    if (!normalized) return true;
+    return [
+      result.businessName,
+      result.username,
+      result.stripeIntegration,
+      result.products,
+      result.users,
+      result.details.paymentType,
+      result.details.compliance,
+      result.details.integrationDepth,
+    ].some((value) => String(value).toLowerCase().includes(normalized));
+  });
+}
+
 function toggleMarked(state) {
   const username = state.results[state.selectedIndex]?.username;
   if (!username) return;
@@ -318,13 +339,13 @@ function hideSelected(state) {
   if (!selected) return;
   state.hidden.add(selected.username);
   state.marked.delete(selected.username);
-  state.results = state.allResults.filter((result) => !state.hidden.has(result.username));
+  state.results = filterResults(state.allResults, state.hidden, state.filter);
   state.selectedIndex = Math.min(state.selectedIndex, Math.max(0, state.results.length - 1));
 }
 
 function restoreHidden(state) {
   state.hidden.clear();
-  state.results = state.allResults;
+  state.results = filterResults(state.allResults, state.hidden, state.filter);
   state.selectedIndex = Math.min(state.selectedIndex, Math.max(0, state.results.length - 1));
 }
 
@@ -335,6 +356,7 @@ function seedCommand(state, command) {
 }
 
 function renderCommandStrip(state) {
+  if (state.filter) return `> filter: ${state.filter} | / search products | ask question | compare selected | remove from view`;
   if (state.command) return `> /${state.command}`;
   return "> / search products | ask question | compare selected | remove from view";
 }
