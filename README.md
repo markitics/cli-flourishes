@@ -37,7 +37,9 @@ node ./bin/flourisher.js compare atlasmetrics vectorgrove summitschema
 
 ## What Search Shows
 
-The default table includes:
+Search uses a table when the selected fields fit the detected terminal width.
+On narrower terminals it switches to wrapped stacked results so human output
+does not run past the declared columns. The default human output includes:
 
 - Business name hyperlinked to its website when terminal hyperlinks are enabled.
 - Username hyperlinked to a Flourisher profile.
