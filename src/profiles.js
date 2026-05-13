@@ -32,6 +32,9 @@ export const ENRICHED_RESULTS = DEMO_RESULTS.map((result, index) => {
       founded,
       teamSize,
       pricingModel,
+      paymentType: paymentTypeFor(result, pricingModel),
+      compliance: complianceFor(result),
+      integrationDepth: integrationDepthFor(result),
       responseTime,
       buyingNote,
       nextAction: result.acceptsLink
@@ -62,4 +65,35 @@ function riskFor(result) {
   if (result.verified === "Pilot") return "Pilot-level signal; validate customer proof.";
   if (!result.acceptsLink) return "No direct link handoff; expect manual workflow.";
   return "Low demo risk.";
+}
+
+function paymentTypeFor(result, pricingModel) {
+  const lowerPricing = pricingModel.toLowerCase();
+  const lowerStripe = result.stripeIntegration.toLowerCase();
+  if (lowerPricing.includes("monthly") || lowerPricing.includes("annual") || lowerPricing.includes("seat")) {
+    return "subscription";
+  }
+  if (lowerPricing.includes("one-time") || lowerStripe.includes("payment links") || lowerStripe.includes("checkout")) {
+    return "one-time payment";
+  }
+  if (lowerStripe.includes("connect") || lowerStripe.includes("marketplace")) {
+    return "marketplace payouts";
+  }
+  return "workflow";
+}
+
+function complianceFor(result) {
+  if (result.verified === "Gold") return "SOC2";
+  if (result.verified === "Silver") return "SOC2 pending";
+  if (result.verified === "Pilot") return "customer refs";
+  if (result.verified === "Community") return "public docs";
+  return "unverified";
+}
+
+function integrationDepthFor(result) {
+  const lower = result.stripeIntegration.toLowerCase();
+  if (lower.includes("marketplace app") || lower.includes("verified")) return "listed app";
+  if (lower.includes("custom") || lower.includes("embedded")) return "deep integration";
+  if (lower.includes("plugin") || lower.includes("payment links")) return "light integration";
+  return "partner signal";
 }
