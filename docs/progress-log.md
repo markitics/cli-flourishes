@@ -26,6 +26,12 @@ so individual commits remain visible in GitHub history.
   scan on small terminals.
 - PR #15: refreshed the narrow search capture after tags were added.
 - PR #16: added deterministic browser result filtering with `--filter`.
+- PR #17: added this public progress log and linked it from the README.
+- PR #18: added a repo-tracked agent skill example in
+  `skills/flourisher-search/SKILL.md`.
+- PR #19: colorized bracket tags in generated SVG terminal captures and pointed
+  the HTML page at SVG assets.
+- PR #20: added `--output ndjson` / `--ndjson` for compact agent reads.
 
 ## Current Demo Commands
 
