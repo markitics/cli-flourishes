@@ -39,6 +39,7 @@ test("search uses wrapped stacked output when the table cannot fit", () => {
   assert.match(result.stdout, /1\. Atlas Metrics - @atlasmetrics/);
   assert.match(result.stdout, /Website: https:\/\/example.com\/atlas-metrics/);
   assert.match(result.stdout, /Profile: https:\/\/flourisher.net\/atlasmetrics/);
+  assert.match(result.stdout, /Tags: \[Gold\] \[marketplace payouts\] \[SOC2\]/);
 });
 
 test("json output is stable and field selectable", () => {
