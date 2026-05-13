@@ -128,6 +128,27 @@
             </div>
             <pre><code>node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane details --columns 132</code></pre>
           </div>
+          <div class="snippet">
+            <div class="snippet-head">
+              <h3>Compare selected</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js browse &quot;analytics&quot; --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane compare --columns 132">Copy</button>
+            </div>
+            <pre><code>node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane compare --columns 132</code></pre>
+          </div>
+          <div class="snippet">
+            <div class="snippet-head">
+              <h3>Follow-on search</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js browse &quot;analytics&quot; --snapshot --selected vectorgrove --pane details --command &quot;search products&quot; --columns 132">Copy</button>
+            </div>
+            <pre><code>node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --pane details --command "search products" --columns 132</code></pre>
+          </div>
+          <div class="snippet">
+            <div class="snippet-head">
+              <h3>Hide incomplete row</h3>
+              <button type="button" data-copy="node ./bin/flourisher.js browse &quot;analytics&quot; --snapshot --hidden atlasmetrics --selected northstar --columns 96">Copy</button>
+            </div>
+            <pre><code>node ./bin/flourisher.js browse "analytics" --snapshot --hidden atlasmetrics --selected northstar --columns 96</code></pre>
+          </div>
         </div>
       </section>
 
@@ -141,6 +162,20 @@
           <figcaption>
             The same hard-coded data can be explored with row selection,
             detail panes, and a marked compare set.
+          </figcaption>
+        </figure>
+        <figure class="wide-artifact">
+          <img src="./assets/browse-compare-wide.png" alt="Terminal screenshot of the interactive compare selected pane">
+          <figcaption>
+            Mark two or more rows to reveal a compare-selected action with
+            payment, compliance, and pricing signals.
+          </figcaption>
+        </figure>
+        <figure class="wide-artifact">
+          <img src="./assets/browse-command-wide.png" alt="Terminal screenshot of a follow-on product search command in the detail pane">
+          <figcaption>
+            Detail panes can seed follow-on commands such as product search or
+            asking a question without leaving the terminal browser.
           </figcaption>
         </figure>
       </section>
@@ -207,6 +242,8 @@
           <a href="./features/05-backend-contract.md">Backend contract</a>
           <a href="./features/06-saved-workflows.md">Saved workflows</a>
           <a href="./features/07-verification-pr-flow.md">Verification and PR flow</a>
+          <a href="../research/README.md">CLI research guide</a>
+          <a href="../research/flourisher-design-backlog.md">Design backlog</a>
         </div>
       </section>
 

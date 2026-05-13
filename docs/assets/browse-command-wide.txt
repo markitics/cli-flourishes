@@ -1,8 +1,8 @@
 ------------------------------------------------------------------------------------------------------------------------------------
 Flourisher interactive browse: "analytics"
-18 visible of 18 hard-coded results | 2 marked | 0 hidden
+18 visible of 18 hard-coded results | 0 marked | 0 hidden
  Results   [Details]   Compare 
-> / search products | ask question | compare selected | remove from view
+> /search products
 ------------------------------------------------------------------------------------------------------------------------------------
    Business          Profile            Tags                           Stripe     | Detail panel                                    
 --- ----------------- ------------------ ------------------------------ ------... | ------------                                    
@@ -14,7 +14,7 @@ Flourisher interactive browse: "analytics"
    Beacon Basket     @beaconbasket      [Community] [subscription] ... Checkou... | Payment: subscription                           
    Quota Studio      @quotastudio       [Gold] [subscription] [SOC2]   Subscri... | Compliance: SOC2 pending                        
    Fairwater Labs    @fairwater         [Pilot] [workflow] [custome... Custom ... | Integration: listed app                         
->* Vector Grove      @vectorgrove       [Silver] [subscription] [SO... Marketp... | Products: Segment analysis; lead scoring        
+>  Vector Grove      @vectorgrove       [Silver] [subscription] [SO... Marketp... | Products: Segment analysis; lead scoring        
                                                                                   | Users: Sales teams; growth analysts             
                                                                                   | HQ: Madison, WI                                 
                                                                                   | Pricing: Monthly tiers                          
@@ -22,13 +22,16 @@ Flourisher interactive browse: "analytics"
                                                                                   | Risk: Low demo risk.                            
                                                                                   | Note: Good compare row for growth analytics.    
                                                                                   |                                                 
+                                                                                  | Product search                                  
+                                                                                  | Matched: Segment analysis; lead scoring         
+                                                                                  | Try next: flourisher search "segment analysis...
+                                                                                  |                                                 
                                                                                   | Actions                                         
                                                                                   | s search products                               
                                                                                   | a ask a question                                
                                                                                   | x remove from view                              
-                                                                                  | c compare selected                              
                                                                                   |                                                 
                                                                                   |                                                 
 ------------------------------------------------------------------------------------------------------------------------------------
-j/k move | enter details | space mark | c compare selected | s search products | a ask | x remove | tab/l next pane | h previous ...
+j/k move | enter details | space mark | s search products | a ask | x remove | tab/l next pane | h previous | esc back | q quit
 ------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,41 @@
+Flourisher search: "analytics"
+Backend: stubbed demo data. Showing 4 hard-coded results for
+every query.
+
+1. Atlas Metrics - @atlasmetrics
+   Website: https://example.com/atlas-metrics
+   Profile: https://flourisher.net/atlasmetrics
+   Stripe: Marketplace app: analytics
+   Status: Link: yes | Projects: yes | Verified: Gold
+   Project: https://flourisher.net/projects/atlasmetrics
+   Products: Cohort dashboards; KPI alerts
+   Users: Growth teams; SaaS founders
+
+2. Northstar Loop - @northstar
+   Website: https://example.com/northstar-loop
+   Profile: https://flourisher.net/northstar
+   Stripe: Embedded Connect partner
+   Status: Link: yes | Projects: yes | Verified: Silver
+   Project: https://flourisher.net/projects/northstar
+   Products: Creator payouts; usage billing
+   Users: Marketplaces; agencies
+
+3. Ledgerfield - @ledgerfield
+   Website: https://example.com/ledgerfield
+   Profile: https://flourisher.net/ledgerfield
+   Stripe: Verified extension
+   Status: Link: no | Projects: no | Verified: Gold
+   Products: Revenue recognition; exports
+   Users: Finance operators; controllers
+
+4. BrightCart - @brightcart
+   Website: https://example.com/brightcart
+   Profile: https://flourisher.net/brightcart
+   Stripe: Checkout plugin
+   Status: Link: yes | Projects: yes | Verified: Community
+   Project: https://flourisher.net/projects/brightcart
+   Products: Digital storefronts; bundles
+   Users: Solo sellers; newsletter shops
+
+Try: flourisher search analytics --output json --fields
+businessName,username,acceptsLink
