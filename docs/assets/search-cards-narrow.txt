@@ -7,6 +7,7 @@ every query.
    Profile: https://flourisher.net/atlasmetrics
    Stripe: Marketplace app: analytics
    Status: Link: yes | Projects: yes | Verified: Gold
+   Tags: [Gold] [marketplace payouts] [SOC2] [listed app]
    Project: https://flourisher.net/projects/atlasmetrics
    Products: Cohort dashboards; KPI alerts
    Users: Growth teams; SaaS founders
@@ -16,6 +17,8 @@ every query.
    Profile: https://flourisher.net/northstar
    Stripe: Embedded Connect partner
    Status: Link: yes | Projects: yes | Verified: Silver
+   Tags: [Silver] [marketplace payouts] [SOC2 pending] [deep
+         integration]
    Project: https://flourisher.net/projects/northstar
    Products: Creator payouts; usage billing
    Users: Marketplaces; agencies
@@ -25,6 +28,7 @@ every query.
    Profile: https://flourisher.net/ledgerfield
    Stripe: Verified extension
    Status: Link: no | Projects: no | Verified: Gold
+   Tags: [Gold] [workflow] [SOC2] [listed app]
    Products: Revenue recognition; exports
    Users: Finance operators; controllers
 
@@ -33,6 +37,8 @@ every query.
    Profile: https://flourisher.net/brightcart
    Stripe: Checkout plugin
    Status: Link: yes | Projects: yes | Verified: Community
+   Tags: [Community] [one-time payment] [public docs] [light
+         integration]
    Project: https://flourisher.net/projects/brightcart
    Products: Digital storefronts; bundles
    Users: Solo sellers; newsletter shops
