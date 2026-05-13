@@ -54,6 +54,13 @@ The backend is intentionally stubbed. Run `flourisher describe search` for the
 machine-readable command contract, or `flourisher describe all` for all command
 and field contracts.
 
+## For Reviewers
+
+- Open `docs/index.html` for the copy-paste demo page.
+- Read `docs/progress-log.md` to see the visible PR sequence after the original
+  squash-merged milestones.
+- Read `research/README.md` for examples of other CLIs worth studying.
+
 ## Interactive Browse
 
 Use `browse` for a keyboard-first result browser:
