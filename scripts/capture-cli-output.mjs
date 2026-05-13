@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+
+import { existsSync, rmSync } from "node:fs";
+import { mkdir, writeFile } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const assetDir = resolve(root, "docs/assets");
+const outputTxt = resolve(assetDir, "search-table-wide.txt");
+const outputSvg = resolve(assetDir, "search-table-wide.svg");
+const outputPng = resolve(assetDir, "search-table-wide.png");
+
+const result = spawnSync(
+  process.execPath,
+  [
+    resolve(root, "bin/flourisher.js"),
+    "search",
+    "analytics",
+    "--no-links",
+    "--columns",
+    "160",
+  ],
+  {
+    cwd: root,
+    encoding: "utf8",
+    env: { ...process.env, NO_COLOR: "1" },
+  },
+);
+
+if (result.status !== 0) {
+  process.stderr.write(result.stderr);
+  process.exit(result.status ?? 1);
+}
+
+const lines = result.stdout.trimEnd().split("\n");
+const charWidth = 5.7;
+const lineHeight = 18;
+const padding = 24;
+const width = Math.ceil(Math.max(...lines.map((line) => line.length)) * charWidth + padding * 2);
+const height = padding * 2 + lines.length * lineHeight;
+const text = lines
+  .map((line, index) => {
+    const y = padding + 14 + index * lineHeight;
+    return `<text x="${padding}" y="${y}">${escapeXml(line)}</text>`;
+  })
+  .join("\n  ");
+
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <rect width="100%" height="100%" rx="12" fill="#101418"/>
+  <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="11" fill="none" stroke="#2c3540"/>
+  <circle cx="26" cy="22" r="5" fill="#e05d44"/>
+  <circle cx="43" cy="22" r="5" fill="#f4bf4f"/>
+  <circle cx="60" cy="22" r="5" fill="#54c571"/>
+  <g transform="translate(0 22)" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="13" fill="#d7e0e8">
+  ${text}
+  </g>
+</svg>
+`;
+
+await mkdir(assetDir, { recursive: true });
+await writeFile(outputTxt, result.stdout);
+await writeFile(outputSvg, svg);
+
+const sips = spawnSync("which", ["sips"], { encoding: "utf8" });
+if (sips.status === 0) {
+  rmSync(outputPng, { force: true });
+  spawnSync("sips", ["-s", "format", "png", outputSvg, "--out", outputPng], {
+    encoding: "utf8",
+  });
+}
+
+process.stdout.write(`Wrote ${outputTxt}\nWrote ${outputSvg}\n`);
+if (existsSync(outputPng)) {
+  process.stdout.write(`Wrote ${outputPng}\n`);
+}
+
+function escapeXml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("\"", "&quot;");
+}
