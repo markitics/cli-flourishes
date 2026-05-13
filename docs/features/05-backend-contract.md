@@ -6,13 +6,31 @@ The UI should not need to change when the fake data is replaced with a backend.
 The CLI should treat the backend as a provider of typed search results and
 pagination metadata.
 
+## Current implementation
+
+Search now goes through a provider boundary. The only executable provider is
+`demo`, which reads the hard-coded dataset:
+
+```sh
+flourisher search "analytics" --backend demo --json --page-size 2
+```
+
+Unsupported providers fail explicitly:
+
+```sh
+flourisher search "analytics" --backend live --json
+```
+
+That command currently returns an error because there is no live backend
+configured. The live backend request/response shape is exposed through
+`flourisher describe search` as a planned contract.
+
 ## Proposed request
 
 ```json
 {
+  "backend": "live",
   "query": "analytics",
-  "limit": 20,
-  "cursor": null,
   "fields": [
     "businessName",
     "website",
@@ -24,7 +42,9 @@ pagination metadata.
     "verified",
     "products",
     "users"
-  ]
+  ],
+  "pageSize": 20,
+  "cursor": null
 }
 ```
 
@@ -35,11 +55,20 @@ pagination metadata.
   "query": "analytics",
   "backend": {
     "mode": "live",
-    "indexVersion": "2026-05-13",
+    "provider": "flourisher-api",
+    "endpoint": "https://api.flourisher.net/search",
+    "indexVersion": "future",
     "rankingVersion": "demo-v1"
   },
   "count": 20,
-  "nextCursor": "opaque-cursor",
+  "page": {
+    "cursor": null,
+    "offset": 0,
+    "pageSize": 20,
+    "returned": 20,
+    "total": null,
+    "nextCursor": "opaque-live-cursor"
+  },
   "results": []
 }
 ```

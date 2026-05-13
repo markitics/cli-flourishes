@@ -91,6 +91,7 @@ export function commandContracts() {
         outputs: ["table", "json", "csv"],
         agentSafe: true,
         examples: [
+          "flourisher search analytics --backend demo --output json",
           "flourisher search analytics --output json --fields businessName,username,acceptsLink --page-size 3",
           "flourisher search analytics --json --page-size 2 --cursor demo:2",
           "flourisher search analytics --json --explain --fields businessName,username",
