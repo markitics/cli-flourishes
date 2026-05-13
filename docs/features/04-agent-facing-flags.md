@@ -14,6 +14,7 @@ flourisher search "analytics" --fields businessName,username,acceptsLink
 flourisher search "analytics" --limit 5
 flourisher search "analytics" --json --page-size 2 --cursor demo:2
 flourisher search "analytics" --json --explain --fields businessName,username
+flourisher search "analytics" --backend demo --json
 flourisher describe search
 flourisher describe all
 ```
@@ -81,6 +82,19 @@ commands such as save, compare, note, export, or contact.
 
 For now, explanations are display signals over fixed demo ordering, not a live
 ranking model.
+
+### `--backend`
+
+Use an explicit provider selector so scripts do not accidentally assume that
+demo data is live data.
+
+```sh
+flourisher search "analytics" --backend demo --json
+```
+
+`demo` is the only executable provider right now. `live` is documented as a
+future request/response contract but intentionally fails until a real backend is
+configured.
 
 ### `--safe-output-dir`
 

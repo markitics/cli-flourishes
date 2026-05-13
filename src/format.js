@@ -1,4 +1,5 @@
 import { FIELD_CONTRACTS, commandContracts, explainResult } from "./contracts.js";
+import { liveBackendContract } from "./provider.js";
 
 const RESET = "\x1b[0m";
 const DIM = "\x1b[2m";
@@ -101,10 +102,13 @@ export function formatTable(results, options = {}) {
 export function formatJson(results, options = {}) {
   const payload = {
     query: options.query,
-    backend: {
+    backend: options.backend ?? {
       mode: "stub",
+      provider: "demo",
+      endpoint: null,
       note: "All queries return the same hard-coded demo results.",
     },
+    request: options.request ?? null,
     count: results.length,
     page: options.page ?? null,
     results: selectFields(results, options.fields),
@@ -151,12 +155,14 @@ export function describeSearchCommand() {
         "--page-size <n>": "Return a cursor-shaped page of n demo rows.",
         "--cursor <token>": "Resume from an opaque demo cursor such as demo:2.",
         "--explain": "Include structured per-result display signals in JSON output.",
+        "--backend <demo>": "Select the search provider; only demo is executable now.",
         "--no-links": "Disable terminal hyperlinks.",
         "--links": "Force terminal hyperlinks even when stdout is not a TTY.",
         "--wide": "Prefer wider columns for demos and screenshots.",
         "--compact": "Prefer narrower columns for small terminals.",
       },
       fields: FIELD_CONTRACTS,
+      backendContract: liveBackendContract(),
       examples: commandContracts().commands.find((command) => command.name === "search").examples,
     },
     null,

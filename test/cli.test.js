@@ -84,13 +84,25 @@ test("describe all returns command and field contracts", () => {
 
 test("json search supports cursor-shaped pages", () => {
   const first = run(["search", "analytics", "--json", "--page-size", "2"]);
-  const second = run(["search", "analytics", "--json", "--page-size", "2", "--cursor", "demo:2"]);
+  const second = run([
+    "search",
+    "analytics",
+    "--json",
+    "--backend",
+    "demo",
+    "--page-size",
+    "2",
+    "--cursor",
+    "demo:2",
+  ]);
 
   assert.equal(first.status, 0);
   assert.equal(second.status, 0);
   const firstPayload = JSON.parse(first.stdout);
   const secondPayload = JSON.parse(second.stdout);
   assert.equal(firstPayload.page.nextCursor, "demo:2");
+  assert.equal(firstPayload.backend.provider, "demo");
+  assert.equal(firstPayload.request.backend, "demo");
   assert.equal(firstPayload.results[0].username, "atlasmetrics");
   assert.equal(secondPayload.page.cursor, "demo:2");
   assert.equal(secondPayload.results[0].username, "ledgerfield");
@@ -120,6 +132,14 @@ test("invalid cursor fails with cursor guidance", () => {
 
   assert.equal(result.status, 1);
   assert.match(result.stderr, /--cursor must be an opaque demo cursor/);
+});
+
+test("unsupported backend fails with available provider guidance", () => {
+  const result = run(["search", "analytics", "--json", "--backend", "live"]);
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Unsupported backend "live"/);
+  assert.match(result.stderr, /Available backend: demo/);
 });
 
 test("profile renders a hard-coded detail view", () => {

@@ -1,5 +1,6 @@
-import { DEMO_RESULTS, RESULT_FIELDS } from "./data.js";
+import { RESULT_FIELDS } from "./data.js";
 import { runBrowseSession } from "./interactive.js";
+import { searchProvider } from "./provider.js";
 import {
   describeAllCommands,
   describeCompareCommand,
@@ -97,15 +98,21 @@ export async function run(argv, io) {
     io.stderr.write(`${limit.message}\n`);
     return 1;
   }
-  const page = parsePageOptions(parsed.options, DEMO_RESULTS.length);
-  if (page instanceof Error) {
-    io.stderr.write(`${page.message}\n`);
+  const providerResult = searchProvider({
+    backend: parsed.options.backend,
+    query,
+    fields: requestedFields,
+    limit,
+    pageSize: parsed.options.pageSize,
+    cursor: parsed.options.cursor,
+    explain: parsed.options.explain,
+  });
+  if (providerResult instanceof Error) {
+    io.stderr.write(`${providerResult.message}\n`);
     return 1;
   }
 
-  const effectiveLimit = page ? page.pageSize : limit;
-  const start = page ? page.offset : 0;
-  const results = DEMO_RESULTS.slice(start, start + (effectiveLimit ?? DEMO_RESULTS.length));
+  const results = providerResult.results;
   if (parsed.options.interactive || parsed.options.snapshot) {
     if (parsed.options.output !== "table") {
       io.stderr.write("--interactive and --snapshot require table output\n");
@@ -122,7 +129,9 @@ export async function run(argv, io) {
     fields: requestedFields,
     layout: parsed.options.layout,
     explain: parsed.options.explain,
-    page,
+    backend: providerResult.backend,
+    request: providerResult.request,
+    page: providerResult.page,
   };
 
   if (parsed.options.output === "json") {
@@ -248,6 +257,7 @@ function parseArgs(argv) {
     pageSize: null,
     cursor: null,
     explain: false,
+    backend: "demo",
     help: false,
     version: false,
     noLinks: false,
@@ -331,6 +341,15 @@ function parseArgs(argv) {
     }
     if (arg === "--explain") {
       options.explain = true;
+      continue;
+    }
+    if (arg === "--backend") {
+      options.backend = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--backend=")) {
+      options.backend = arg.slice("--backend=".length);
       continue;
     }
     if (arg === "--no-links") {
@@ -456,33 +475,6 @@ function parseLimit(limit) {
   return value;
 }
 
-function parsePageOptions(options, total) {
-  if (!options.pageSize && !options.cursor) return null;
-  const pageSize = Number(options.pageSize ?? options.limit ?? 10);
-  if (!Number.isInteger(pageSize) || pageSize < 1) {
-    return new Error("--page-size must be a positive integer");
-  }
-  const offset = parseCursor(options.cursor);
-  if (offset instanceof Error) return offset;
-  const nextOffset = offset + pageSize;
-
-  return {
-    cursor: options.cursor ?? null,
-    offset,
-    pageSize,
-    returned: Math.max(0, Math.min(pageSize, total - offset)),
-    total,
-    nextCursor: nextOffset < total ? `demo:${nextOffset}` : null,
-  };
-}
-
-function parseCursor(cursor) {
-  if (!cursor) return 0;
-  const match = /^demo:(\d+)$/.exec(cursor);
-  if (!match) return new Error("--cursor must be an opaque demo cursor such as demo:2");
-  return Number(match[1]);
-}
-
 function supportsColor(env) {
   if (env.NO_COLOR) return false;
   if (env.FORCE_COLOR && env.FORCE_COLOR !== "0") return true;
@@ -512,6 +504,7 @@ Options
       --page-size <n>            Return a cursor-shaped page of n rows
       --cursor <token>           Resume from a cursor such as demo:2
       --explain                  Include JSON display signals
+      --backend <demo>           Select result provider. Default: demo
       --links                    Force terminal hyperlinks
       --no-links                 Disable terminal hyperlinks
       --wide                     Prefer wider table columns
