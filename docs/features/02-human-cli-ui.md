@@ -38,6 +38,7 @@ default:
 
 ```sh
 flourisher search "analytics" --interactive
+flourisher browse "analytics"
 ```
 
 Suggested controls:
@@ -67,10 +68,17 @@ The detail panel should answer questions that do not fit in a table:
 
 ## Current decision
 
-Keep the MVP non-interactive but shape the data so an interactive result browser
-can reuse the same records. The current table is a stable fallback for CI,
-scripts, terminals without a TTY, and demos where an agent cannot operate a
-full-screen app.
+Keep the default `search` command non-interactive and add the richer browser as
+an explicit mode. The current implementation supports `flourisher browse
+"analytics"` for a TTY browser and `--snapshot` for deterministic docs, tests,
+and screenshot generation.
+
+```sh
+flourisher browse "analytics" --snapshot --selected vectorgrove --pane details
+```
+
+The table remains the stable fallback for CI, scripts, terminals without a TTY,
+and demos where an agent cannot operate a full-screen app.
 
 ## Alternative
 

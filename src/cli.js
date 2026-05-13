@@ -1,6 +1,8 @@
 import { DEMO_RESULTS, RESULT_FIELDS } from "./data.js";
+import { runBrowseSession } from "./interactive.js";
 import {
   describeCompareCommand,
+  describeBrowseCommand,
   describeProfileCommand,
   describeSearchCommand,
   formatComparison,
@@ -13,7 +15,7 @@ import {
   formatProfileJson,
   formatTable,
 } from "./format.js";
-import { findProfile, findProfiles } from "./profiles.js";
+import { ENRICHED_RESULTS, findProfile, findProfiles } from "./profiles.js";
 
 const VERSION = "0.1.0";
 
@@ -48,12 +50,21 @@ export async function run(argv, io) {
     return 0;
   }
 
+  if (parsed.command === "describe" && parsed.positionals[0] === "browse") {
+    io.stdout.write(describeBrowseCommand());
+    return 0;
+  }
+
   if (parsed.command === "profile") {
     return renderProfile(parsed, io, { color, columns });
   }
 
   if (parsed.command === "compare") {
     return renderCompare(parsed, io, { color, columns });
+  }
+
+  if (parsed.command === "browse") {
+    return renderBrowse(parsed, io, { color, columns });
   }
 
   if (parsed.command !== "search") {
@@ -82,6 +93,14 @@ export async function run(argv, io) {
   }
 
   const results = DEMO_RESULTS.slice(0, limit ?? DEMO_RESULTS.length);
+  if (parsed.options.interactive || parsed.options.snapshot) {
+    if (parsed.options.output !== "table") {
+      io.stderr.write("--interactive and --snapshot require table output\n");
+      return 1;
+    }
+    return renderBrowseWithQuery(query, parsed, io, { color, columns, limit });
+  }
+
   const renderOptions = {
     query,
     color,
@@ -103,6 +122,43 @@ export async function run(argv, io) {
 
   io.stdout.write(formatTable(results, renderOptions));
   return 0;
+}
+
+function renderBrowse(parsed, io, context) {
+  const query = parsed.positionals.join(" ").trim();
+  if (!query) {
+    io.stderr.write("Browse requires a term, for example: flourisher browse analytics\n");
+    return 1;
+  }
+
+  if (parsed.options.output !== "table") {
+    io.stderr.write("Browse currently supports table output only; use search --output json for agent output\n");
+    return 1;
+  }
+
+  const limit = parseLimit(parsed.options.limit);
+  if (limit instanceof Error) {
+    io.stderr.write(`${limit.message}\n`);
+    return 1;
+  }
+
+  return renderBrowseWithQuery(query, parsed, io, { ...context, limit });
+}
+
+function renderBrowseWithQuery(query, parsed, io, context) {
+  const results = ENRICHED_RESULTS.slice(0, context.limit ?? ENRICHED_RESULTS.length);
+
+  return runBrowseSession(results, {
+    query,
+    color: context.color,
+    columns: context.columns,
+    selected: parsed.options.selected,
+    marked: parsed.options.marked,
+    markSelected: parsed.options.markSelected,
+    pane: parsed.options.pane,
+    snapshot: parsed.options.snapshot,
+    visibleRows: parsed.options.rows,
+  }, io);
 }
 
 function renderProfile(parsed, io, context) {
@@ -180,6 +236,13 @@ function parseArgs(argv) {
     links: undefined,
     layout: undefined,
     columns: undefined,
+    interactive: false,
+    snapshot: false,
+    selected: null,
+    marked: null,
+    markSelected: false,
+    pane: null,
+    rows: null,
   };
   const positionals = [];
   let command = null;
@@ -245,6 +308,54 @@ function parseArgs(argv) {
     }
     if (arg === "--compact") {
       options.layout = "compact";
+      continue;
+    }
+    if (arg === "--interactive" || arg === "-i") {
+      options.interactive = true;
+      continue;
+    }
+    if (arg === "--snapshot") {
+      options.snapshot = true;
+      continue;
+    }
+    if (arg === "--mark-selected") {
+      options.markSelected = true;
+      continue;
+    }
+    if (arg === "--selected") {
+      options.selected = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--selected=")) {
+      options.selected = arg.slice("--selected=".length);
+      continue;
+    }
+    if (arg === "--marked") {
+      options.marked = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--marked=")) {
+      options.marked = arg.slice("--marked=".length);
+      continue;
+    }
+    if (arg === "--pane") {
+      options.pane = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--pane=")) {
+      options.pane = arg.slice("--pane=".length);
+      continue;
+    }
+    if (arg === "--rows") {
+      options.rows = Number(readValue(argv, index, arg));
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--rows=")) {
+      options.rows = Number(arg.slice("--rows=".length));
       continue;
     }
     if (arg === "--columns") {
@@ -316,9 +427,10 @@ function helpText() {
 
 Usage
   flourisher search <term> [options]
+  flourisher browse <term> [options]
   flourisher profile <username> [options]
   flourisher compare <username...> [options]
-  flourisher describe <search|profile|compare>
+  flourisher describe <search|browse|profile|compare>
 
 Search behavior
   This demo ignores the term and returns the same hard-coded result set.
@@ -335,6 +447,12 @@ Options
       --wide                     Prefer wider table columns
       --compact                  Prefer narrower table columns
       --columns <n>              Pretend the terminal is n columns wide
+      --interactive, -i          Open the keyboard-first result browser
+      --snapshot                 Render the browser frame once and exit
+      --selected <username>      Select a row in snapshot or browser mode
+      --marked <list>            Comma-separated compare set for browser mode
+      --pane <results|details|compare>
+                                  Select the active browser pane
   -h, --help                     Show this help
   -v, --version                  Show the version
 
@@ -342,6 +460,8 @@ Examples
   flourisher search "analytics"
   flourisher search "analytics" --wide
   flourisher search "analytics" --output json --fields businessName,username,acceptsLink
+  flourisher search "analytics" --interactive
+  flourisher browse "analytics" --snapshot --selected vectorgrove --pane details
   flourisher search "anything" --csv --limit 5
   flourisher profile atlasmetrics
   flourisher compare atlasmetrics vectorgrove summitschema

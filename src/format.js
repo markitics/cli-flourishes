@@ -195,6 +195,34 @@ export function describeCompareCommand() {
   )}\n`;
 }
 
+export function describeBrowseCommand() {
+  return `${JSON.stringify(
+    {
+      command: "flourisher browse <term>",
+      status: "demo",
+      behavior: "Opens a keyboard-first result browser over the same hard-coded data.",
+      flags: {
+        "--snapshot": "Render one deterministic browser frame and exit, useful for docs and tests.",
+        "--selected <username>": "Select a row before rendering.",
+        "--marked <list>": "Comma-separated usernames to mark for comparison.",
+        "--pane <results|details|compare>": "Choose the active pane.",
+        "--columns <n>": "Pretend the terminal is n columns wide.",
+      },
+      keys: {
+        "j/k": "Move selection down or up.",
+        enter: "Open details for the selected row.",
+        space: "Mark or unmark the selected row for comparison.",
+        tab: "Move to the next pane.",
+        "h/l": "Move between panes.",
+        esc: "Close the current pane or exit from results.",
+        q: "Quit.",
+      },
+    },
+    null,
+    2,
+  )}\n`;
+}
+
 export function formatProfile(profile, options = {}) {
   const rows = [
     ["Business", `${profile.businessName} (${profile.website})`],

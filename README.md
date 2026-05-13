@@ -27,6 +27,7 @@ Without linking:
 
 ```sh
 node ./bin/flourisher.js search "analytics"
+node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --pane details
 node ./bin/flourisher.js profile atlasmetrics
 node ./bin/flourisher.js compare atlasmetrics vectorgrove summitschema
 ```
@@ -47,12 +48,37 @@ The default table includes:
 The backend is intentionally stubbed. Run `flourisher describe search` for the
 machine-readable command contract.
 
+## Interactive Browse
+
+Use `browse` for a keyboard-first result browser:
+
+```sh
+flourisher browse "analytics"
+```
+
+Keys:
+
+- `j` / `k`: move between rows.
+- `enter`: open the details pane.
+- `space`: mark or unmark a company for comparison.
+- `tab` or `l`: move to the next pane.
+- `h`: move to the previous pane.
+- `esc`: close the current pane or exit from results.
+- `q`: quit.
+
+For docs, tests, and screenshots, use deterministic snapshot mode:
+
+```sh
+flourisher browse "analytics" --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane details --columns 132
+```
+
 ## Verification
 
 ```sh
 npm test
 npm run capture
 node ./bin/flourisher.js search "analytics" --no-links --columns 160
+node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --pane details
 node ./bin/flourisher.js search "analytics" --output json --limit 2
 node ./bin/flourisher.js profile atlasmetrics
 node ./bin/flourisher.js compare atlasmetrics vectorgrove

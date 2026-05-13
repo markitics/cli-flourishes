@@ -84,6 +84,60 @@ test("compare renders selected demo profiles", () => {
   assert.match(result.stdout, /@vectorgrove/);
 });
 
+test("browse renders a deterministic interactive snapshot", () => {
+  const result = run([
+    "browse",
+    "analytics",
+    "--snapshot",
+    "--selected",
+    "vectorgrove",
+    "--marked",
+    "atlasmetrics,vectorgrove",
+    "--pane",
+    "details",
+    "--columns",
+    "132",
+  ]);
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /Flourisher interactive browse: "analytics"/);
+  assert.match(result.stdout, /Results\s+\[Details\]\s+Compare/);
+  assert.match(result.stdout, />\* Vector Grove/);
+  assert.match(result.stdout, /Website: https:\/\/example.com\/vector-grove/);
+  assert.match(result.stdout, /j\/k move/);
+});
+
+test("search interactive can render a compare snapshot", () => {
+  const result = run([
+    "search",
+    "analytics",
+    "--interactive",
+    "--snapshot",
+    "--selected",
+    "vectorgrove",
+    "--marked",
+    "atlasmetrics,vectorgrove",
+    "--pane",
+    "compare",
+    "--columns",
+    "132",
+  ]);
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /\[Compare\]/);
+  assert.match(result.stdout, /\* @atlasmetrics: Gold, Usage-based/);
+  assert.match(result.stdout, /\* @vectorgrove: Silver, Monthly tiers/);
+});
+
+test("describe browse returns the keyboard contract", () => {
+  const result = run(["describe", "browse"]);
+
+  assert.equal(result.status, 0);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.command, "flourisher browse <term>");
+  assert.equal(payload.keys["j/k"], "Move selection down or up.");
+});
+
 test("profile and compare support json output", () => {
   const profile = run(["profile", "atlasmetrics", "--json"]);
   const compare = run(["compare", "atlasmetrics,vectorgrove", "--json"]);
