@@ -60,6 +60,7 @@ and field contracts.
 - Read `docs/progress-log.md` to see the visible PR sequence after the original
   squash-merged milestones.
 - Read `research/README.md` for examples of other CLIs worth studying.
+- Read `skills/flourisher-search/SKILL.md` for an agent-facing workflow example.
 
 ## Interactive Browse
 
