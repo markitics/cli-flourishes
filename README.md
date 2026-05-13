@@ -49,6 +49,10 @@ machine-readable command contract.
 
 ```sh
 npm test
+npm run capture
 node ./bin/flourisher.js search "analytics" --no-links --columns 160
 node ./bin/flourisher.js search "analytics" --output json --limit 2
 ```
+
+Open `docs/index.html` in a browser for the explainer page and copy-paste demo
+commands.

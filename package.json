@@ -7,6 +7,7 @@
     "flourisher": "./bin/flourisher.js"
   },
   "scripts": {
+    "capture": "node ./scripts/capture-cli-output.mjs",
     "test": "node --test",
     "search": "node ./bin/flourisher.js search",
     "describe": "node ./bin/flourisher.js describe search"
