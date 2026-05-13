@@ -218,8 +218,46 @@ test("search interactive can render a compare snapshot", () => {
 
   assert.equal(result.status, 0);
   assert.match(result.stdout, /\[Compare\]/);
-  assert.match(result.stdout, /\* @atlasmetrics: Gold, Usage-based/);
-  assert.match(result.stdout, /\* @vectorgrove: Silver, Monthly tiers/);
+  assert.match(result.stdout, /Compare selected/);
+  assert.match(result.stdout, /\* @atlasmetrics: marketplace payouts, SOC2/);
+  assert.match(result.stdout, /\* @vectorgrove: subscription, SOC2 pending/);
+  assert.match(result.stdout, /c compare selected/);
+});
+
+test("browse can hide rows and show follow-on command prompts", () => {
+  const hidden = run([
+    "browse",
+    "analytics",
+    "--snapshot",
+    "--hidden",
+    "atlasmetrics",
+    "--selected",
+    "northstar",
+    "--columns",
+    "96",
+  ]);
+  const command = run([
+    "browse",
+    "analytics",
+    "--snapshot",
+    "--selected",
+    "vectorgrove",
+    "--pane",
+    "details",
+    "--command",
+    "search products",
+    "--columns",
+    "132",
+  ]);
+
+  assert.equal(hidden.status, 0);
+  assert.match(hidden.stdout, /17 visible of 18/);
+  assert.doesNotMatch(hidden.stdout, />\s+Atlas Metrics/);
+  assert.match(hidden.stdout, /u restore hidden/);
+  assert.equal(command.status, 0);
+  assert.match(command.stdout, /> \/search products/);
+  assert.match(command.stdout, /Product search/);
+  assert.match(command.stdout, /Segment analysis; lead scoring/);
 });
 
 test("describe browse returns the keyboard contract", () => {
@@ -229,6 +267,7 @@ test("describe browse returns the keyboard contract", () => {
   const payload = JSON.parse(result.stdout);
   assert.equal(payload.command, "flourisher browse <term>");
   assert.equal(payload.keys["j/k"], "Move selection down or up.");
+  assert.equal(payload.keys.c, "Open compare mode when two or more rows are marked.");
 });
 
 test("profile and compare support json output", () => {
