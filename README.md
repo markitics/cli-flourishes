@@ -67,6 +67,11 @@ Keys:
 - `j` / `k`: move between rows.
 - `enter`: open the details pane.
 - `space`: mark or unmark a company for comparison.
+- `c`: compare selected companies once two or more are marked.
+- `s`: seed a follow-on product search from the selected company.
+- `a`: seed a question about the selected company.
+- `x`: remove the selected company from the current view.
+- `u`: restore hidden companies.
 - `tab` or `l`: move to the next pane.
 - `h`: move to the previous pane.
 - `esc`: close the current pane or exit from results.
@@ -76,6 +81,8 @@ For docs, tests, and screenshots, use deterministic snapshot mode:
 
 ```sh
 flourisher browse "analytics" --snapshot --selected vectorgrove --marked atlasmetrics,vectorgrove --pane details --columns 132
+flourisher browse "analytics" --snapshot --selected vectorgrove --pane details --command "search products"
+flourisher browse "analytics" --snapshot --hidden atlasmetrics --selected northstar
 ```
 
 ## Verification

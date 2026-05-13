@@ -23,7 +23,7 @@ const VERSION = "0.1.0";
 
 export async function run(argv, io) {
   const parsed = parseArgs(argv);
-  const color = supportsColor(io.env);
+  const color = supportsColor(io.env, io.stdout);
   const links = parsed.options.links ?? (Boolean(io.stdout.isTTY) && !parsed.options.noLinks);
   const columns = parsed.options.columns ?? io.columns ?? Number(io.env.COLUMNS) ?? 120;
 
@@ -178,8 +178,10 @@ function renderBrowseWithQuery(query, parsed, io, context) {
     columns: context.columns,
     selected: parsed.options.selected,
     marked: parsed.options.marked,
+    hidden: parsed.options.hidden,
     markSelected: parsed.options.markSelected,
     pane: parsed.options.pane,
+    command: parsed.options.command,
     snapshot: parsed.options.snapshot,
     visibleRows: parsed.options.rows,
   }, io);
@@ -268,8 +270,10 @@ function parseArgs(argv) {
     snapshot: false,
     selected: null,
     marked: null,
+    hidden: null,
     markSelected: false,
     pane: null,
+    command: null,
     rows: null,
   };
   const positionals = [];
@@ -399,6 +403,15 @@ function parseArgs(argv) {
       options.marked = arg.slice("--marked=".length);
       continue;
     }
+    if (arg === "--hidden") {
+      options.hidden = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--hidden=")) {
+      options.hidden = arg.slice("--hidden=".length);
+      continue;
+    }
     if (arg === "--pane") {
       options.pane = readValue(argv, index, arg);
       index += 1;
@@ -406,6 +419,15 @@ function parseArgs(argv) {
     }
     if (arg.startsWith("--pane=")) {
       options.pane = arg.slice("--pane=".length);
+      continue;
+    }
+    if (arg === "--command") {
+      options.command = readValue(argv, index, arg);
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--command=")) {
+      options.command = arg.slice("--command=".length);
       continue;
     }
     if (arg === "--rows") {
@@ -475,10 +497,10 @@ function parseLimit(limit) {
   return value;
 }
 
-function supportsColor(env) {
+function supportsColor(env, stdout) {
   if (env.NO_COLOR) return false;
   if (env.FORCE_COLOR && env.FORCE_COLOR !== "0") return true;
-  return false;
+  return Boolean(stdout?.isTTY);
 }
 
 function helpText() {
@@ -514,8 +536,10 @@ Options
       --snapshot                 Render the browser frame once and exit
       --selected <username>      Select a row in snapshot or browser mode
       --marked <list>            Comma-separated compare set for browser mode
+      --hidden <list>            Comma-separated usernames hidden from browser snapshots
       --pane <results|details|compare>
                                   Select the active browser pane
+      --command <text>           Show a deterministic browser command/search prompt
   -h, --help                     Show this help
   -v, --version                  Show the version
 
