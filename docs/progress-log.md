@@ -35,6 +35,7 @@ node ./bin/flourisher.js browse analytics --snapshot --selected vectorgrove --ma
 node ./bin/flourisher.js browse analytics --snapshot --selected vectorgrove --pane details --command "search products" --columns 132
 node ./bin/flourisher.js browse analytics --snapshot --filter refund --columns 96
 node ./bin/flourisher.js search analytics --json --fields businessName,username,acceptsLink --limit 3
+node ./bin/flourisher.js search analytics --ndjson --fields businessName,username --limit 3
 ```
 
 ## Current Verification

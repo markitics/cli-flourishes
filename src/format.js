@@ -128,6 +128,19 @@ export function formatJson(results, options = {}) {
   return `${JSON.stringify(payload, null, 2)}\n`;
 }
 
+export function formatNdjson(results, options = {}) {
+  const offset = options.page?.offset ?? 0;
+  const lines = selectFields(results, options.fields).map((result, index) => {
+    return JSON.stringify({
+      type: "result",
+      query: options.query,
+      index: offset + index,
+      result,
+    });
+  });
+  return `${lines.join("\n")}\n`;
+}
+
 export function formatCsv(results, options = {}) {
   const fields = options.fields?.length ? options.fields : [
     "businessName",
@@ -157,7 +170,8 @@ export function describeSearchCommand() {
       status: "demo",
       behavior: "Returns the same hard-coded result set for any term.",
       flags: {
-        "--output <table|json|csv>": "Choose human table output or machine-readable output.",
+        "--output <table|json|csv|ndjson>": "Choose human table output or machine-readable output.",
+        "--output ndjson": "Return one JSON result object per line for streaming-style agents.",
         "--fields <list>": "Comma-separated fields to return, useful for agents conserving context.",
         "--limit <n>": "Limit the number of demo rows returned.",
         "--page-size <n>": "Return a cursor-shaped page of n demo rows.",
@@ -196,7 +210,7 @@ export function describeProfileCommand() {
       status: "demo",
       behavior: "Shows a hard-coded detail panel for one demo company.",
       flags: {
-        "--output <table|json|csv>": "Choose human table output or machine-readable output.",
+        "--output <table|json|csv|ndjson>": "Choose human table output or machine-readable output.",
       },
     },
     null,
@@ -211,7 +225,7 @@ export function describeCompareCommand() {
       status: "demo",
       behavior: "Shows a hard-coded comparison table for selected demo companies.",
       flags: {
-        "--output <table|json|csv>": "Choose human table output or machine-readable output.",
+        "--output <table|json|csv|ndjson>": "Choose human table output or machine-readable output.",
       },
     },
     null,
@@ -285,6 +299,10 @@ export function formatProfileJson(profile) {
   return `${JSON.stringify(profile, null, 2)}\n`;
 }
 
+export function formatProfileNdjson(profile) {
+  return `${JSON.stringify({ type: "profile", username: profile.username, profile })}\n`;
+}
+
 export function formatProfileCsv(profile) {
   const flat = flattenProfile(profile);
   const fields = Object.keys(flat);
@@ -338,6 +356,13 @@ export function formatComparison(profiles, options = {}) {
 
 export function formatComparisonJson(profiles) {
   return `${JSON.stringify({ count: profiles.length, profiles }, null, 2)}\n`;
+}
+
+export function formatComparisonNdjson(profiles) {
+  const lines = profiles.map((profile, index) => {
+    return JSON.stringify({ type: "profile", index, username: profile.username, profile });
+  });
+  return `${lines.join("\n")}\n`;
 }
 
 export function formatComparisonCsv(profiles) {

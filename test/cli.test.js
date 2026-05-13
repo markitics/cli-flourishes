@@ -73,6 +73,25 @@ test("csv output can be limited", () => {
   assert.match(result.stdout, /^businessName,website,username/);
 });
 
+test("ndjson output returns one compact object per line", () => {
+  const result = run([
+    "search",
+    "analytics",
+    "--ndjson",
+    "--fields",
+    "businessName,username",
+    "--limit",
+    "2",
+  ]);
+
+  assert.equal(result.status, 0);
+  const lines = result.stdout.trim().split("\n").map((line) => JSON.parse(line));
+  assert.equal(lines.length, 2);
+  assert.deepEqual(Object.keys(lines[0].result), ["businessName", "username"]);
+  assert.equal(lines[0].type, "result");
+  assert.equal(lines[1].index, 1);
+});
+
 test("describe search returns the machine-readable command contract", () => {
   const result = run(["describe", "search"]);
 

@@ -10,6 +10,8 @@ principle is: every expensive or ambiguous byte should be optional.
 - `--fields`: let the caller choose a small subset so an agent does not spend
   context on irrelevant fields.
 - `--page-size` and `--cursor`: list commands should be bounded by default.
+- `--output ndjson`: one object per line gives agents a streaming-style format
+  that can be consumed incrementally.
 - `describe`: runtime command and field contracts help agents learn the current
   binary rather than relying on stale docs.
 - `--dry-run` for mutations: agents should be able to validate write requests

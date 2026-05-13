@@ -15,6 +15,7 @@ flourisher search "analytics" --limit 5
 flourisher search "analytics" --json --page-size 2 --cursor demo:2
 flourisher search "analytics" --json --explain --fields businessName,username
 flourisher search "analytics" --backend demo --json
+flourisher search "analytics" --ndjson --fields businessName,username --limit 3
 flourisher describe search
 flourisher describe all
 ```
@@ -28,6 +29,15 @@ URLs, and nested future fields.
 
 ```sh
 flourisher search "analytics" --output json
+```
+
+### `--output ndjson`
+
+Use when an agent wants one compact JSON record per line instead of a
+pretty-printed response envelope.
+
+```sh
+flourisher search "analytics" --ndjson --fields businessName,username --limit 3
 ```
 
 ### `--fields`

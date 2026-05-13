@@ -24,6 +24,7 @@ flourisher search "analytics" --output json --fields businessName,username,accep
 flourisher search "analytics" --backend demo --json
 flourisher search "analytics" --json --page-size 2 --cursor demo:2
 flourisher search "analytics" --json --explain --fields businessName,username
+flourisher search "analytics" --ndjson --fields businessName,username --limit 3
 ```
 
 Without linking:
@@ -104,6 +105,7 @@ node ./bin/flourisher.js browse "analytics" --snapshot --selected vectorgrove --
 node ./bin/flourisher.js search "analytics" --output json --limit 2
 node ./bin/flourisher.js search "analytics" --json --page-size 2 --cursor demo:2
 node ./bin/flourisher.js search "analytics" --backend demo --json --limit 2
+node ./bin/flourisher.js search "analytics" --ndjson --fields businessName,username --limit 3
 node ./bin/flourisher.js describe all
 node ./bin/flourisher.js profile atlasmetrics
 node ./bin/flourisher.js compare atlasmetrics vectorgrove
